@@ -9,7 +9,7 @@ const options = [
   { value: "cover", label: "Cover" },
   { value: "contain", label: "Contain" },
 ];
-//
+
 function Image({ name, resize, index, screenIndex, src }) {
   const dispatch = useDispatch();
   return (
