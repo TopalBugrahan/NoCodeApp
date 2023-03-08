@@ -11,3 +11,206 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.app {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.leftbar_container {
+  border: 1px solid black;
+  width: 20%;
+
+}
+
+.rightbar_container {
+
+  border: 1px solid;
+  width: 20%;
+  overflow-y: scroll;
+
+}
+
+.a {
+
+  width: 60%;
+}
+
+.header {
+  height: 6vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.center {
+  border: 1px solid black;
+  overflow-x: scroll;
+  display: flex;
+  align-items: center;
+  height: 94vh;
+}
+
+.page_button {
+  background-color: white;
+  color: black;
+  border-radius: 10px;
+  height: 30px;
+}
+
+.right_button {
+  background-color: white;
+  width: 100%;
+  height: inherit;
+  border: 1px solid rgba(171, 169, 169, 0.5);
+  border-radius: 8px;
+}
+
+.right_button_container {
+  width: 60%;
+  height: 30px;
+
+}
+
+.color_pick {
+  position: absolute;
+  z-index: 5;
+}
+
+.right_bar_title_button {
+  width: 23%;
+  margin-right: 2px;
+  margin-bottom: 2px;
+  background-color: white;
+  border: 1px solid rgba(171, 169, 169, 0.5);
+}
+
+.right_bar_title_button_container {
+  width: 23%;
+  position: absolute;
+  top: 37%;
+  left: 72.5%;
+
+}
+
+.right_bar_input {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  height: 30px;
+  border: 1px solid rgba(171, 169, 169, 0.5);
+  border-radius: 8px;
+}
+
+.login_container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.login_left_container {
+  width: 60vw;
+  height: 100vh;
+  border-right: 1px solid black;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.login_left_background {
+  background-image: url("sing_up.jpg");
+  width: inherit;
+  height: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.login_left_image {
+  width: 40%;
+  filter: invert(0%) sepia(98%) saturate(0%) hue-rotate(163deg) brightness(100%) contrast(101%);
+}
+
+.login_right_container {
+  width: 40vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login_right_inner_container {
+  width: 80%;
+  height: 70%;
+}
+
+.login_right_form {
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.login-icon_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+}
+
+.login_right_icon {
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  background-color: purple;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.input_container {
+  display: flex;
+  flex-direction: column;
+}
+
+.login_input {
+  height: 40px;
+  margin-top: 10px;
+  border: 1px solid #909090;
+  border-radius: 5px;
+}
+
+.login_button {
+  margin-top: 30px;
+  height: 40px;
+  border-radius: 5px;
+  background-color: #1565C0;
+  border: none;
+  color: white;
+  font-size: medium;
+}
+
+.login_right_sing_up {
+  display: flex;
+  margin-top: 10px;
+}
+
+.all_link {
+  text-decoration: none;
+}
+
+.sing_up_image {
+  background-image: url("sing_up.jpg");
+  height: inherit;
+  width: inherit;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sing_up_title {
+  color: white;
+  font-size: 50px;
+  font-weight: bold;
+}

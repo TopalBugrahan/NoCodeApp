@@ -1,0 +1,47 @@
+.resizeable {
+    position: absolute;
+    border-radius: 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 30px;
+    min-height: 30px;
+    padding: 8px;
+}
+
+.resizer {
+    position: absolute;
+    background: black;
+}
+
+.resizer-r {
+    cursor: col-resize;
+    height: 100%;
+    right: 0;
+    top: 0;
+    width: 3px;
+}
+
+.resizer-t {
+    cursor: row-resize;
+    height: 3px;
+    left: 0;
+    top: 0;
+    width: 100%;
+}
+
+.resizer-b {
+    cursor: row-resize;
+    height: 3px;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+.resizer-l {
+    cursor: col-resize;
+    height: 100%;
+    left: 0;
+    top: 0;
+    width: 3px;
+}
