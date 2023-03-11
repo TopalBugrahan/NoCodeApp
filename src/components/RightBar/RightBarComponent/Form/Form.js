@@ -2,7 +2,7 @@ import React from "react";
 import RightBarElement from "../RightBarElement/RightBarElement";
 import Layout from "../Layout/Layout";
 import Style from "../Style/Style";
-function Form({ index, screenIndex, item }) {
+function Form({ index, screenIndex, item, contain_index }) {
   const {
     name,
     text,
@@ -39,6 +39,7 @@ function Form({ index, screenIndex, item }) {
         text={text}
         index={index}
         screenIndex={screenIndex}
+        contain_index={contain_index}
         text_align={text_align}
         textDecoration={textDecoration}
         font_weight={font_weight}
@@ -55,6 +56,7 @@ function Form({ index, screenIndex, item }) {
       <Layout
         screenIndex={screenIndex}
         index={index}
+        contain_index={contain_index}
         top={top}
         left={left}
         height={height}
@@ -63,6 +65,7 @@ function Form({ index, screenIndex, item }) {
       <Style
         screenIndex={screenIndex}
         index={index}
+        contain_index={contain_index}
         name={name}
         borderColor={borderColor}
         borderStyle={borderStyle}

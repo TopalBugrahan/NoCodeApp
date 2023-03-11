@@ -8,6 +8,7 @@ function RightBarElement({
   text,
   index,
   screenIndex,
+  contain_index,
   name,
   text_align,
   textDecoration,
@@ -27,6 +28,7 @@ function RightBarElement({
         <Button
           text={text}
           index={index}
+          contain_index={contain_index}
           screenIndex={screenIndex}
           name={name}
           font_size={font_size}
@@ -38,6 +40,7 @@ function RightBarElement({
         <Title
           text={text}
           index={index}
+          contain_index={contain_index}
           screenIndex={screenIndex}
           name={name}
           text_align={text_align}
@@ -53,6 +56,7 @@ function RightBarElement({
         <TextInput
           text={text}
           index={index}
+          contain_index={contain_index}
           screenIndex={screenIndex}
           name={name}
           text_color={text_color}
@@ -66,6 +70,7 @@ function RightBarElement({
       return (
         <Image
           index={index}
+          contain_index={contain_index}
           screenIndex={screenIndex}
           name={name}
           resize={resize}

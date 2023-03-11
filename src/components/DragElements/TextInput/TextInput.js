@@ -1,8 +1,12 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { changeText } from "../../../redux/Screen/ScreenSlice";
-function TextInput({ index, screenIndex }) {
+function TextInput({ index, screenIndex, isComingContain, contain_index }) {
   const { myScreens } = useSelector((state) => state.screen);
+  let data = myScreens[screenIndex].lastDroppedItem[index];
+  if (isComingContain === true) {
+    data = myScreens[screenIndex].lastDroppedItem[index].items[contain_index];
+  }
   const dispatch = useDispatch();
   const {
     text,
@@ -15,10 +19,9 @@ function TextInput({ index, screenIndex }) {
     borderWidth,
     hint,
     keyboard,
-  } = myScreens[screenIndex].lastDroppedItem[index];
-  let width = myScreens[screenIndex].lastDroppedItem[index].width - borderWidth;
-  let height =
-    myScreens[screenIndex].lastDroppedItem[index].height - borderWidth;
+  } = data;
+  let width = data.width - borderWidth;
+  let height = data.height - borderWidth;
   if (width < 0) {
     width = 0;
   }

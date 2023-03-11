@@ -28,11 +28,13 @@ function Element({ item, isDropped }) {
     keyboard,
     src,
     resize,
+    items,
   } = item;
   const [{ opacity }, drag] = useDrag(
     () => ({
       type,
       item: {
+        items,
         name,
         type,
         top,

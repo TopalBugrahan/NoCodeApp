@@ -7,7 +7,15 @@ import {
 } from "../../../../../redux/Screen/ScreenSlice";
 import ColorElement from "../../ColorBar/ColorElement";
 import { AiOutlineFontSize } from "react-icons/ai";
-function Button({ text, index, screenIndex, name, font_size, text_color }) {
+function Button({
+  text,
+  index,
+  screenIndex,
+  contain_index,
+  name,
+  font_size,
+  text_color,
+}) {
   const dispatch = useDispatch();
   return (
     <div
@@ -26,12 +34,13 @@ function Button({ text, index, screenIndex, name, font_size, text_color }) {
         value={text}
         onChange={(e) => {
           const text = e.target.value;
-          dispatch(changeText({ screenIndex, index, text }));
+          dispatch(changeText({ screenIndex, contain_index, index, text }));
         }}
       />
       <ColorElement
         screenIndex={screenIndex}
         index={index}
+        contain_index={contain_index}
         title="Text Color"
         change={changeTextColor}
         elementColor={text_color}
@@ -68,10 +77,12 @@ function Button({ text, index, screenIndex, name, font_size, text_color }) {
             className="right_bar_input"
             style={{ width: "75%" }}
             type="number"
-            value={font_size}
+            defaultValue={font_size}
             onChange={(e) => {
               const size = Number(e.target.value);
-              dispatch(changeTextSize({ screenIndex, index, size }));
+              dispatch(
+                changeTextSize({ screenIndex, contain_index, index, size })
+              );
             }}
           />
         </div>

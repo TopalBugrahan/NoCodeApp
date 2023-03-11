@@ -16,6 +16,7 @@ function Title({
   text,
   index,
   screenIndex,
+  contain_index,
   name,
   text_align,
   textDecoration,
@@ -42,12 +43,13 @@ function Title({
         value={text}
         onChange={(e) => {
           const text = e.target.value;
-          dispatch(changeText({ screenIndex, index, text }));
+          dispatch(changeText({ screenIndex, contain_index, index, text }));
         }}
       />
       <ColorElement
         screenIndex={screenIndex}
         index={index}
+        contain_index={contain_index}
         title="Text Color"
         change={changeTextColor}
         elementColor={text_color}
@@ -88,7 +90,14 @@ function Title({
                 let font_weight1;
                 if (font_weight === "bold") font_weight1 = null;
                 else font_weight1 = "bold";
-                dispatch(changeFontWidth({ screenIndex, index, font_weight1 }));
+                dispatch(
+                  changeFontWidth({
+                    screenIndex,
+                    contain_index,
+                    index,
+                    font_weight1,
+                  })
+                );
               }}
             >
               B
@@ -101,7 +110,14 @@ function Title({
                 let fontStyle1;
                 if (fontStyle === "italic") fontStyle1 = null;
                 else fontStyle1 = "italic";
-                dispatch(changeFontStyle({ screenIndex, index, fontStyle1 }));
+                dispatch(
+                  changeFontStyle({
+                    screenIndex,
+                    contain_index,
+                    index,
+                    fontStyle1,
+                  })
+                );
               }}
             >
               I
@@ -117,7 +133,12 @@ function Title({
                 if (textDecoration === "underline") textDecoration1 = null;
                 else textDecoration1 = "underline";
                 dispatch(
-                  changeTextDecoration({ screenIndex, index, textDecoration1 })
+                  changeTextDecoration({
+                    screenIndex,
+                    contain_index,
+                    index,
+                    textDecoration1,
+                  })
                 );
               }}
             >
@@ -153,7 +174,12 @@ function Title({
                   if (text_align === "right") text_align1 = "left";
                   else text_align1 = "right";
                   dispatch(
-                    changeTextAlign({ screenIndex, index, text_align1 })
+                    changeTextAlign({
+                      screenIndex,
+                      contain_index,
+                      index,
+                      text_align1,
+                    })
                   );
                   if (visibility === "hidden") setVisibility("visible");
                   if (visibility === "visible") setVisibility("hidden");
@@ -170,7 +196,12 @@ function Title({
                   if (text_align === "center") text_align1 = "left";
                   else text_align1 = "center";
                   dispatch(
-                    changeTextAlign({ screenIndex, index, text_align1 })
+                    changeTextAlign({
+                      screenIndex,
+                      contain_index,
+                      index,
+                      text_align1,
+                    })
                   );
                   if (visibility === "hidden") setVisibility("visible");
                   if (visibility === "visible") setVisibility("hidden");
@@ -195,10 +226,12 @@ function Title({
               className="right_bar_input"
               style={{ width: "75%" }}
               type="number"
-              value={font_size}
+              defaultValue={font_size}
               onChange={(e) => {
                 const size = Number(e.target.value);
-                dispatch(changeTextSize({ screenIndex, index, size }));
+                dispatch(
+                  changeTextSize({ screenIndex, contain_index, index, size })
+                );
               }}
             />
           </div>

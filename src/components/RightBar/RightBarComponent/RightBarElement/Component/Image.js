@@ -9,8 +9,8 @@ const options = [
   { value: "cover", label: "Cover" },
   { value: "contain", label: "Contain" },
 ];
-//
-function Image({ name, resize, index, screenIndex, src }) {
+
+function Image({ name, resize, index, contain_index, screenIndex, src }) {
   const dispatch = useDispatch();
   return (
     <div
@@ -56,7 +56,7 @@ function Image({ name, resize, index, screenIndex, src }) {
             value={src}
             onChange={(item) => {
               const src = item.target.value;
-              dispatch(changeSrc({ index, screenIndex, src }));
+              dispatch(changeSrc({ index, contain_index, screenIndex, src }));
             }}
           />
         </div>
@@ -94,7 +94,9 @@ function Image({ name, resize, index, screenIndex, src }) {
               defaultValue={{ value: resize, label: resize }}
               onChange={(item) => {
                 const resize = item.value;
-                dispatch(changeResize({ index, screenIndex, resize }));
+                dispatch(
+                  changeResize({ index, contain_index, screenIndex, resize })
+                );
               }}
             />
           </div>

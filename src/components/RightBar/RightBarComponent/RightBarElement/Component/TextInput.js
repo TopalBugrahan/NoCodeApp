@@ -21,6 +21,7 @@ function TextInput({
   text,
   index,
   screenIndex,
+  contain_index,
   name,
   font_size,
   text_color,
@@ -44,12 +45,13 @@ function TextInput({
         value={text}
         onChange={(e) => {
           const text = e.target.value;
-          dispatch(changeText({ screenIndex, index, text }));
+          dispatch(changeText({ screenIndex, contain_index, index, text }));
         }}
       />
       <ColorElement
         screenIndex={screenIndex}
         index={index}
+        contain_index={contain_index}
         title="Text Color"
         change={changeTextColor}
         elementColor={text_color}
@@ -85,10 +87,12 @@ function TextInput({
             className="right_bar_input"
             style={{ width: "75%" }}
             type="number"
-            value={font_size}
+            defaultValue={font_size}
             onChange={(e) => {
               const size = Number(e.target.value);
-              dispatch(changeTextSize({ screenIndex, index, size }));
+              dispatch(
+                changeTextSize({ screenIndex, contain_index, index, size })
+              );
             }}
           />
         </div>
@@ -124,7 +128,7 @@ function TextInput({
             value={hint}
             onChange={(e) => {
               const hint = e.target.value;
-              dispatch(changeHint({ screenIndex, index, hint }));
+              dispatch(changeHint({ screenIndex, contain_index, index, hint }));
             }}
           />
         </div>
@@ -151,7 +155,9 @@ function TextInput({
             options={options}
             onChange={(item) => {
               const keyboard = item.value;
-              dispatch(changeKeyboard({ screenIndex, index, keyboard }));
+              dispatch(
+                changeKeyboard({ screenIndex, contain_index, index, keyboard })
+              );
             }}
           />
         </div>

@@ -1,8 +1,11 @@
 import React from "react";
 import { useSelector } from "react-redux";
-function Button({ index, screenIndex }) {
+function Button({ index, screenIndex, isComingContain, contain_index }) {
   const { myScreens } = useSelector((state) => state.screen);
-
+  let data = myScreens[screenIndex].lastDroppedItem[index];
+  if (isComingContain === true) {
+    data = myScreens[screenIndex].lastDroppedItem[index].items[contain_index];
+  }
   const {
     text,
     text_color,
@@ -12,9 +15,9 @@ function Button({ index, screenIndex }) {
     borderRedius,
     borderStyle,
     borderWidth,
-  } = myScreens[screenIndex].lastDroppedItem[index];
-  let width = myScreens[screenIndex].lastDroppedItem[index].width;
-  let height = myScreens[screenIndex].lastDroppedItem[index].height;
+  } = data;
+  let width = data.width;
+  let height = data.height;
   if (width < 0) {
     width = 0;
   }

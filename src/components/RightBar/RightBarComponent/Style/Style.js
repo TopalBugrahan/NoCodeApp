@@ -21,6 +21,7 @@ function Style({
   borderWidth,
   backgroundColor,
   borderRedius,
+  contain_index,
 }) {
   const dispatch = useDispatch();
   return (
@@ -39,6 +40,7 @@ function Style({
         index={index}
         change={changeBackgroundColor}
         elementColor={backgroundColor}
+        contain_index={contain_index}
       />
       <ColorElement
         title={"Border Color"}
@@ -46,6 +48,7 @@ function Style({
         index={index}
         change={changeBorderColor}
         elementColor={borderColor}
+        contain_index={contain_index}
       />
       <div
         style={{
@@ -68,10 +71,17 @@ function Style({
           className="right_bar_input"
           style={{ width: "60%", height: "30px" }}
           type="number"
-          value={borderWidth}
+          defaultValue={borderWidth}
           onChange={(e) => {
             const border_width = Number(e.target.value);
-            dispatch(changeBorderWidth({ screenIndex, index, border_width }));
+            dispatch(
+              changeBorderWidth({
+                screenIndex,
+                index,
+                contain_index,
+                border_width,
+              })
+            );
           }}
         />
       </div>
@@ -97,7 +107,14 @@ function Style({
             options={options}
             onChange={(item) => {
               const border_style = item.value;
-              dispatch(changeBorderStyle({ screenIndex, index, border_style }));
+              dispatch(
+                changeBorderStyle({
+                  screenIndex,
+                  contain_index,
+                  index,
+                  border_style,
+                })
+              );
             }}
           />
         </div>
@@ -123,10 +140,12 @@ function Style({
           className="right_bar_input"
           style={{ width: "60%", height: "30px" }}
           type="number"
-          value={borderRedius}
+          defaultValue={borderRedius}
           onChange={(e) => {
             const redius = Number(e.target.value);
-            dispatch(changeBorderRedius({ screenIndex, index, redius }));
+            dispatch(
+              changeBorderRedius({ screenIndex, contain_index, index, redius })
+            );
           }}
         />
       </div>

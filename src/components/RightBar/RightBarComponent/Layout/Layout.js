@@ -4,10 +4,22 @@ import {
   changeHeight,
   changeWidth,
   changeLeft,
+  changeContainLeft,
+  changeContainTop,
+  changeContainHeight,
+  changeContainWidth,
 } from "../../../../redux/Screen/ScreenSlice";
 import { useDispatch } from "react-redux";
 import { RxWidth, RxHeight } from "react-icons/rx";
-function Layout({ screenIndex, index, top, left, width, height }) {
+function Layout({
+  screenIndex,
+  index,
+  contain_index,
+  top,
+  left,
+  width,
+  height,
+}) {
   const dispatch = useDispatch();
   return (
     <div
@@ -41,10 +53,21 @@ function Layout({ screenIndex, index, top, left, width, height }) {
             className="right_bar_input"
             style={{ width: "50%", height: "30px" }}
             type="number"
-            value={left}
+            defaultValue={left}
             onChange={(e) => {
               const change_left = Number(e.target.value);
-              dispatch(changeLeft({ screenIndex, index, change_left }));
+              if (contain_index === undefined) {
+                dispatch(changeLeft({ screenIndex, index, change_left }));
+              } else {
+                dispatch(
+                  changeContainLeft({
+                    screenIndex,
+                    index,
+                    contain_index,
+                    change_left,
+                  })
+                );
+              }
             }}
           />
         </div>
@@ -62,10 +85,21 @@ function Layout({ screenIndex, index, top, left, width, height }) {
             className="right_bar_input"
             style={{ width: "50%", height: "30px" }}
             type="number"
-            value={top}
+            defaultValue={top}
             onChange={(e) => {
               const change_top = Number(e.target.value);
-              dispatch(changeTop({ screenIndex, index, change_top }));
+              if (contain_index === undefined) {
+                dispatch(changeTop({ screenIndex, index, change_top }));
+              } else {
+                dispatch(
+                  changeContainTop({
+                    screenIndex,
+                    index,
+                    contain_index,
+                    change_top,
+                  })
+                );
+              }
             }}
           />
         </div>
@@ -92,10 +126,21 @@ function Layout({ screenIndex, index, top, left, width, height }) {
             className="right_bar_input"
             style={{ width: "50%", height: "30px" }}
             type="number"
-            value={width}
+            defaultValue={width}
             onChange={(e) => {
               const width = Number(e.target.value);
-              dispatch(changeWidth({ screenIndex, index, width }));
+              if (contain_index === undefined) {
+                dispatch(changeWidth({ screenIndex, index, width }));
+              } else {
+                dispatch(
+                  changeContainWidth({
+                    screenIndex,
+                    index,
+                    contain_index,
+                    width,
+                  })
+                );
+              }
             }}
           />
         </div>
@@ -113,10 +158,21 @@ function Layout({ screenIndex, index, top, left, width, height }) {
             className="right_bar_input"
             style={{ width: "50%", height: "30px" }}
             type="number"
-            value={height}
+            defaultValue={height}
             onChange={(e) => {
               const height = Number(e.target.value);
-              dispatch(changeHeight({ screenIndex, index, height }));
+              if (contain_index === undefined) {
+                dispatch(changeHeight({ screenIndex, index, height }));
+              } else {
+                dispatch(
+                  changeContainHeight({
+                    screenIndex,
+                    index,
+                    contain_index,
+                    height,
+                  })
+                );
+              }
             }}
           />
         </div>

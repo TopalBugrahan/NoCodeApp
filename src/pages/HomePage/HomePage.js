@@ -5,6 +5,7 @@ import {
   addOnePage,
   addElementToScreen,
   changeInnerElementPosition,
+  changeContainElementToScreenElement,
 } from "../../redux/Screen/ScreenSlice";
 import LeftBar from "../../components/LeftBar";
 import RightBar from "../../components/RightBar";
@@ -16,6 +17,7 @@ import Title from "../../components/DragElements/Title";
 import Image from "../../components/DragElements/ImageComp";
 import { ItemTypes } from "../../ItemType";
 import Parent from "../../components/DragElements/Parent";
+import Contain from "../../components/DragElements/Contain";
 
 function HomePage() {
   //Benim Sayfam reduxta bulunuyor
@@ -38,78 +40,85 @@ function HomePage() {
       //dispatch redux fonksiyonlarını kullanmak için var
       //monitor React DND den geliyor
       const { name, type } = item;
+      const index1 = index;
       const delta = monitor.getSourceClientOffset();
-      let left = Math.round(
-        delta.x - document.getElementById("Screen" + index).offsetLeft
-      );
-      let top = Math.round(
-        delta.y - document.getElementById("Screen" + index).offsetTop
-      );
-      if (left < 0) {
-        left = 0;
-      }
-      if (top < 0) {
-        top = 0;
-      }
 
-      //droppedBoxNames hangi boxların droplandığını liste şeklinde tutuyor
-      setDroppedBoxNames(
-        update(droppedBoxNames, name ? { $push: [name] } : { $push: [] })
-      );
-      //burada ise screen içine atılan son elemntin ismini veriyor
-      const json = {
-        item: {
-          name: item.name,
-          type: item.type,
-          top: top,
-          left: left,
-          width: null,
-          height: null,
-          isChange: false,
-          screenIndex: index,
-          isSelect: false,
-        },
-        index: index,
-        inner_index: item.inner_index,
-      };
-      if (type === "element") {
-        const data = {
-          item: {
-            backgroundColor: item.backgroundColor,
-            font_size: item.font_size,
-            height: item.height,
-            isChange: false,
-            left: left,
-            name: item.name,
-            text: item.text,
-            text_align: item.text_align,
-            text_color: item.text_color,
-            font_weight: item.font_weight,
-            top: top,
-            type: item.type,
-            width: item.width,
-            screenIndex: index,
-            isSelect: false,
-            fontStyle: item.fontStyle,
-            textDecoration: item.textDecoration,
-            borderColor: item.borderColor,
-            borderWidth: item.borderWidth,
-            borderStyle: item.borderStyle,
-            borderRedius: item.borderRedius,
-            hint: item.hint,
-            disabled: item.disablet,
-            keyboard: item.keyboard,
-            src: item.src,
-            resize: item.resize,
-          },
-          index: index,
-          inner_index: item.inner_index,
-        };
-        //Sol bardan ekrana atılacak elementi listeye ekliyor.
-        dispatch(addElementToScreen(data));
-      } else if (type === "inner_element") {
-        //ekran içinde olan elementin ekran içindeki konumunu değiştirmek için kullanılıyor.
-        dispatch(changeInnerElementPosition(json));
+      if (delta != null) {
+        let left = Math.round(
+          delta.x - document.getElementById("Screen" + index).offsetLeft
+        );
+        let top = Math.round(
+          delta.y - document.getElementById("Screen" + index).offsetTop
+        );
+        if (left < 0) {
+          left = 0;
+        }
+        if (top < 0) {
+          top = 0;
+        }
+        //droppedBoxNames hangi boxların droplandığını liste şeklinde tutuyor
+        setDroppedBoxNames(
+          update(droppedBoxNames, name ? { $push: [name] } : { $push: [] })
+        );
+        //burada ise screen içine atılan son elemntin ismini veriyor
+        if (type === "element") {
+          const data = {
+            item: {
+              backgroundColor: item.backgroundColor,
+              font_size: item.font_size,
+              height: item.height,
+              isChange: false,
+              left: left,
+              name: item.name,
+              text: item.text,
+              text_align: item.text_align,
+              text_color: item.text_color,
+              font_weight: item.font_weight,
+              top: top,
+              type: item.type,
+              width: item.width,
+              screenIndex: index,
+              isSelect: false,
+              fontStyle: item.fontStyle,
+              textDecoration: item.textDecoration,
+              borderColor: item.borderColor,
+              borderWidth: item.borderWidth,
+              borderStyle: item.borderStyle,
+              borderRedius: item.borderRedius,
+              hint: item.hint,
+              disabled: item.disablet,
+              keyboard: item.keyboard,
+              src: item.src,
+              resize: item.resize,
+              items: item.items,
+            },
+            index: index,
+            inner_index: item.inner_index,
+          };
+          //Sol bardan ekrana atılacak elementi listeye ekliyor.
+          dispatch(addElementToScreen(data));
+        } else if (type === "inner_element") {
+          if (item.isContain) {
+            const { index, inner_index } = item;
+            const screenIndex = index1;
+            dispatch(
+              changeContainElementToScreenElement({
+                index,
+                inner_index,
+                screenIndex,
+                left,
+                top,
+              })
+            );
+          } else {
+            const screenIndex = index1;
+            const index = item.inner_index;
+            //ekran içinde olan elementin ekran içindeki konumunu değiştirmek için kullanılıyor.
+            dispatch(
+              changeInnerElementPosition({ screenIndex, index, left, top })
+            );
+          }
+        }
       }
     },
     [droppedBoxNames]
@@ -159,14 +168,14 @@ function HomePage() {
                                 index={index}
                                 screenIndex={screenIndex}
                               />
-                            ) : (
-                              (name = "Image" ? (
-                                <Image
-                                  index={index}
-                                  screenIndex={screenIndex}
-                                />
-                              ) : null)
-                            )}
+                            ) : name === "Image" ? (
+                              <Image index={index} screenIndex={screenIndex} />
+                            ) : name === "Contain" ? (
+                              <Contain
+                                index={index}
+                                screenIndex={screenIndex}
+                              />
+                            ) : null}
                           </Parent>
                         </div>
                       );

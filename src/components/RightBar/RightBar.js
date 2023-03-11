@@ -13,14 +13,53 @@ function RightBar() {
         return (
           <div key={index}>
             {lastDroppedItem.map((item, index) => {
-              if (item.isSelect) {
+              if (item.items !== undefined) {
+                if (item.isSelect) {
+                  return (
+                    <div key={index + "bura"}>
+                      <Form
+                        item={item}
+                        index={index}
+                        screenIndex={screenIndex}
+                      />
+                    </div>
+                  );
+                }
+                const items = item.items;
                 return (
-                  <div key={index}>
-                    <Form item={item} index={index} screenIndex={screenIndex} />
+                  <div>
+                    {items.map((item, contain_index = index) => {
+                      if (item.isSelect) {
+                        return (
+                          <div key={index + "hus"}>
+                            <Form
+                              item={item}
+                              index={index}
+                              screenIndex={screenIndex}
+                              contain_index={contain_index}
+                            />
+                          </div>
+                        );
+                      } else {
+                        return null;
+                      }
+                    })}
                   </div>
                 );
               } else {
-                return null;
+                if (item.isSelect) {
+                  return (
+                    <div key={index + "eve"}>
+                      <Form
+                        item={item}
+                        index={index}
+                        screenIndex={screenIndex}
+                      />
+                    </div>
+                  );
+                } else {
+                  return null;
+                }
               }
             })}
           </div>

@@ -1,9 +1,13 @@
 import React from "react";
 import { useSelector } from "react-redux";
-function Image({ index, screenIndex }) {
+function Image({ index, screenIndex, isComingContain, contain_index }) {
   const { myScreens } = useSelector((state) => state.screen);
-  let width = myScreens[screenIndex].lastDroppedItem[index].width;
-  let height = myScreens[screenIndex].lastDroppedItem[index].height;
+  let data = myScreens[screenIndex].lastDroppedItem[index];
+  if (isComingContain === true) {
+    data = myScreens[screenIndex].lastDroppedItem[index].items[contain_index];
+  }
+  let width = data.width;
+  let height = data.height;
   const {
     backgroundColor,
     borderColor,
@@ -12,7 +16,7 @@ function Image({ index, screenIndex }) {
     borderWidth,
     src,
     resize,
-  } = myScreens[screenIndex].lastDroppedItem[index];
+  } = data;
   return (
     <div>
       <img

@@ -1,7 +1,14 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { SketchPicker } from "react-color";
-function ColorElement({ screenIndex, index, title, change, elementColor }) {
+function ColorElement({
+  screenIndex,
+  index,
+  title,
+  contain_index,
+  change,
+  elementColor,
+}) {
   const [visibility, setVisible] = useState("hidden");
   const [color, setColor] = useState();
   const dispatch = useDispatch();
@@ -41,7 +48,7 @@ function ColorElement({ screenIndex, index, title, change, elementColor }) {
           onChangeComplete={(color) => {
             const color1 = color.hex;
             setColor(color.hex);
-            dispatch(change({ index, screenIndex, color1 }));
+            dispatch(change({ index, screenIndex, contain_index, color1 }));
           }}
         />
       </div>

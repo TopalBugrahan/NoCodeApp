@@ -1,8 +1,11 @@
 import React from "react";
 import { useSelector } from "react-redux";
-function Title({ index, screenIndex }) {
+function Title({ index, screenIndex, isComingContain, contain_index }) {
   const { myScreens } = useSelector((state) => state.screen);
-
+  let data = myScreens[screenIndex].lastDroppedItem[index];
+  if (isComingContain === true) {
+    data = myScreens[screenIndex].lastDroppedItem[index].items[contain_index];
+  }
   const {
     text,
     text_color,
@@ -16,12 +19,9 @@ function Title({ index, screenIndex }) {
     borderRedius,
     borderStyle,
     borderWidth,
-  } = myScreens[screenIndex].lastDroppedItem[index];
-  let width =
-    myScreens[screenIndex].lastDroppedItem[index].width - 2 * borderWidth;
-  let height =
-    myScreens[screenIndex].lastDroppedItem[index].height - 2 * borderWidth;
-  console.log(width, height);
+  } = data;
+  let width = data.width - 2 * borderWidth;
+  let height = data.height - 2 * borderWidth;
   if (width < 0) {
     width = 0;
   }

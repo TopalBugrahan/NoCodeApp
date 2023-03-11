@@ -1,14 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
-import Drag from "../../../Drag/Drag";
-import "./Parent.style.css";
+import "../../Parent/Parent.style.css";
+import Drag from "../../../../Drag/Drag";
 import {
-  changeWidth,
-  changeHeight,
-  changeSelect,
-} from "../../../redux/Screen/ScreenSlice";
-
-function Parent({
+  changeContainHeight,
+  changeContainWidth,
+  changeContainSelect,
+} from "../../../../redux/Screen/ScreenSlice";
+function ContainParent({
   name,
   type,
   left,
@@ -20,17 +19,16 @@ function Parent({
   screenIndex,
   height,
   width,
+  contain_index,
 }) {
-  //index benim child indexi
-  //useSelector ile de perent indexi alıcaz
   const [isHovering, setIsHovering] = useState(false);
-  const ref = useRef(null);
-  const refLeft = useRef(null);
-  const refRight = useRef(null);
-  const refTop = useRef(null);
-  const refBottom = useRef(null);
+  const ref1 = useRef(null);
+  const refLeft1 = useRef(null);
+  const refRight1 = useRef(null);
+  const refTop1 = useRef(null);
+  const refBottom1 = useRef(null);
   const dispatch = useDispatch();
-
+  const isContain = true;
   const handleMouseOver = () => {
     setIsHovering(true);
   };
@@ -41,7 +39,7 @@ function Parent({
 
   useEffect(() => {
     if (isHovering) {
-      const resizeableEle = ref.current;
+      const resizeableEle = ref1.current;
       const styles = window.getComputedStyle(resizeableEle);
       let width = parseInt(styles.width, 10);
       let height = parseInt(styles.height, 10);
@@ -53,7 +51,9 @@ function Parent({
         const dx = event.clientX - x;
         x = event.clientX;
         width = width + dx;
-        dispatch(changeWidth({ width, index, screenIndex }));
+        dispatch(
+          changeContainWidth({ width, index, screenIndex, contain_index })
+        );
         resizeableEle.style.width = `${width}px`;
       };
 
@@ -74,7 +74,9 @@ function Parent({
         const dy = event.clientY - y;
         height = height - dy;
         y = event.clientY;
-        dispatch(changeHeight({ height, index, screenIndex }));
+        dispatch(
+          changeContainHeight({ height, index, screenIndex, contain_index })
+        );
         resizeableEle.style.height = `${height}px`;
       };
 
@@ -96,7 +98,9 @@ function Parent({
         const dy = event.clientY - y;
         height = height + dy;
         y = event.clientY;
-        dispatch(changeHeight({ height, index, screenIndex }));
+        dispatch(
+          changeContainHeight({ height, index, screenIndex, contain_index })
+        );
         resizeableEle.style.height = `${height}px`;
       };
 
@@ -118,7 +122,9 @@ function Parent({
         const dx = event.clientX - x;
         x = event.clientX;
         width = width - dx;
-        dispatch(changeWidth({ width, index, screenIndex }));
+        dispatch(
+          changeContainWidth({ width, index, screenIndex, contain_index })
+        );
         resizeableEle.style.width = `${width}px`;
       };
 
@@ -135,13 +141,13 @@ function Parent({
       };
 
       // Add mouse down event listener
-      const resizerRight = refRight.current;
+      const resizerRight = refRight1.current;
       resizerRight.addEventListener("mousedown", onMouseDownRightResize);
-      const resizerTop = refTop.current;
+      const resizerTop = refTop1.current;
       resizerTop.addEventListener("mousedown", onMouseDownTopResize);
-      const resizerBottom = refBottom.current;
+      const resizerBottom = refBottom1.current;
       resizerBottom.addEventListener("mousedown", onMouseDownBottomResize);
-      const resizerLeft = refLeft.current;
+      const resizerLeft = refLeft1.current;
       resizerLeft.addEventListener("mousedown", onMouseDownLeftResize);
 
       return () => {
@@ -152,20 +158,30 @@ function Parent({
       };
     }
   }, [isHovering]);
+  //darg bak
+  const { drag, isDragging } = Drag(
+    name,
+    type,
+    left,
+    top,
+    contain_index,
+    isChange,
+    isContain,
+    index
+  );
 
-  const { drag, isDragging } = Drag(name, type, left, top, index, isChange);
   const deneme = (e) => {
     if (!e) e = window.event;
     e.cancelBubble = true;
     if (e.stopPropagation) e.stopPropagation();
-    dispatch(changeSelect({ index, screenIndex }));
+    dispatch(changeContainSelect({ index, screenIndex, contain_index }));
   };
   if (isDragging) {
     return <div ref={drag} />;
   }
   return (
     <div
-      ref={ref}
+      ref={ref1}
       className="resizeable"
       style={{ top: top, left: left, width, height }}
       onClick={deneme}
@@ -176,12 +192,12 @@ function Parent({
         {children}
       </div>
 
-      {isHovering && <div ref={refLeft} className="resizer resizer-l"></div>}
-      {isHovering && <div ref={refTop} className="resizer resizer-t"></div>}
-      {isHovering && <div ref={refRight} className="resizer resizer-r"></div>}
-      {isHovering && <div ref={refBottom} className="resizer resizer-b"></div>}
+      {isHovering && <div ref={refLeft1} className="resizer resizer-l"></div>}
+      {isHovering && <div ref={refTop1} className="resizer resizer-t"></div>}
+      {isHovering && <div ref={refRight1} className="resizer resizer-r"></div>}
+      {isHovering && <div ref={refBottom1} className="resizer resizer-b"></div>}
     </div>
   );
 }
 
-export default Parent;
+export default ContainParent;
