@@ -165,8 +165,7 @@ function ContainParent({
     left,
     top,
     contain_index,
-    isChange,
-    isContain,
+    true,
     index
   );
 

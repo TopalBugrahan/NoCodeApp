@@ -14,19 +14,32 @@ export const screenSlice = createSlice({
       {
         name: "Button",
         type: ItemTypes.ELEMENT,
-        top: null,
-        left: null,
+        top: 0,
+        left: 0,
         width: 70,
         height: 30,
-        isChange: null,
         text: "Button",
         text_color: "#000000",
         font_size: 15,
         backgroundColor: "blue",
         borderColor: "#000000",
         borderWidth: 0,
-        borderStyle: null,
+        borderStyle: "solid",
         borderRedius: 0,
+        //
+        disabled: null,
+        fontStyle: null,
+        font_weight: null,
+        hint: null,
+        items: null,
+        keyboard: null,
+        offColor: null,
+        onColor: null,
+        resize: null,
+        src: null,
+        textDecoration: null,
+        text_align: null,
+        value: null,
       },
       {
         name: "Title",
@@ -36,25 +49,33 @@ export const screenSlice = createSlice({
         text: "Title",
         text_color: "#000000",
         font_size: 15,
-        font_weight: null,
-        fontStyle: null,
+        font_weight: "normal",
+        fontStyle: "normal",
         textDecoration: null,
         text_align: "left",
-        top: null,
-        left: null,
-        isChange: null,
+        top: 0,
+        left: 0,
         backgroundColor: "white",
         borderColor: "#000000",
         borderWidth: 0,
-        borderStyle: null,
+        borderStyle: "solid",
         borderRedius: 0,
+        //
+        disabled: null,
+        hint: null,
+        items: null,
+        keyboard: null,
+        offColor: null,
+        onColor: null,
+        resize: null,
+        src: null,
+        value: null,
       },
       {
         name: "Text Input",
         type: ItemTypes.ELEMENT,
-        top: null,
-        left: null,
-        isChange: null,
+        top: 0,
+        left: 0,
         hint: "...",
         disabled: true,
         keyboard: "text",
@@ -66,38 +87,140 @@ export const screenSlice = createSlice({
         backgroundColor: "white",
         borderColor: "#000000",
         borderWidth: 1,
-        borderStyle: null,
+        borderStyle: "solid",
         borderRedius: 0,
+        //
+        fontStyle: null,
+        font_weight: null,
+        items: null,
+        offColor: null,
+        onColor: null,
+        resize: null,
+        src: null,
+        textDecoration: null,
+        text_align: null,
+        value: null,
       },
       {
         name: "Image",
         type: ItemTypes.ELEMENT,
-        top: null,
-        left: null,
-        isChange: null,
+        top: 0,
+        left: 0,
         width: 90,
         height: 90,
-        resize: null,
+        resize: "cover",
         src: "image.png",
         borderColor: "#000000",
         borderWidth: 1,
-        borderStyle: null,
+        borderStyle: "solid",
         borderRedius: 0,
+        //
+        disabled: null,
+        font_size: null,
+        font_weight: null,
+        fontStyle: null,
+        hint: null,
+        items: null,
+        keyboard: null,
+        offColor: null,
+        onColor: null,
+        text: null,
+        text_align: null,
+        text_color: null,
+        textDecoration: null,
+        value: null,
+        backgroundColor: "white",
       },
       {
         name: "Contain",
         type: ItemTypes.ELEMENT,
-        top: null,
-        left: null,
-        isChange: null,
+        top: 0,
+        left: 0,
         width: 200,
         height: 200,
-        backgroundColor: "blue",
-        borderColor: "#000000",
-        borderWidth: 0,
-        borderStyle: null,
+        backgroundColor: "white",
+        borderColor: "#808080",
+        borderWidth: 1,
+        borderStyle: "solid",
         borderRedius: 0,
         items: [],
+        //
+        disabled: null,
+        font_weight: null,
+        fontStyle: null,
+        font_size: null,
+        hint: null,
+        keyboard: null,
+        offColor: null,
+        onColor: null,
+        resize: null,
+        src: null,
+        text: null,
+        text_align: null,
+        text_color: null,
+        textDecoration: null,
+        value: null,
+      },
+      {
+        name: "Loading",
+        type: ItemTypes.ELEMENT,
+        top: 0,
+        left: 0,
+        width: 40,
+        height: 40,
+        text_color: "#000000",
+        backgroundColor: "white",
+        borderColor: "#808080",
+        borderWidth: 0,
+        borderStyle: "solid",
+        borderRedius: 0,
+        //
+        disabled: null,
+        items: null,
+        font_weight: null,
+        fontStyle: null,
+        font_size: null,
+        hint: null,
+        keyboard: null,
+        offColor: null,
+        onColor: null,
+        resize: null,
+        src: null,
+        text: null,
+        text_align: null,
+        text_color: null,
+        textDecoration: null,
+        value: null,
+      },
+      {
+        name: "Switch",
+        type: ItemTypes.ELEMENT,
+        top: 0,
+        left: 0,
+        disabled: false,
+        value: false,
+        width: 70,
+        height: 30,
+        text_color: "#000000",
+        backgroundColor: "white",
+        borderColor: "#808080",
+        borderWidth: 0,
+        borderStyle: "solid",
+        borderRedius: 0,
+        onColor: "#00FF00",
+        offColor: "#808080",
+        //
+        font_weight: null,
+        fontStyle: null,
+        font_size: null,
+        hint: null,
+        items: null,
+        keyboard: null,
+        resize: null,
+        src: null,
+        text: null,
+        text_align: null,
+        textDecoration: null,
       },
     ],
   },
@@ -146,7 +269,7 @@ export const screenSlice = createSlice({
       state.myScreens.forEach((element) => {
         element.lastDroppedItem.forEach((item) => {
           item.isSelect = false;
-          if (item.items !== undefined) {
+          if (item.items !== null) {
             item.items.forEach((contain_element) => {
               contain_element.isSelect = false;
             });
@@ -209,6 +332,26 @@ export const screenSlice = createSlice({
         ].text_color = color1;
       } else {
         state.myScreens[screenIndex].lastDroppedItem[index].text_color = color1;
+      }
+    },
+    changeOnColor: (state, action) => {
+      const { index, screenIndex, contain_index, color1 } = action.payload;
+      if (contain_index !== undefined) {
+        state.myScreens[screenIndex].lastDroppedItem[index].items[
+          contain_index
+        ].onColor = color1;
+      } else {
+        state.myScreens[screenIndex].lastDroppedItem[index].onColor = color1;
+      }
+    },
+    changeOffColor: (state, action) => {
+      const { index, screenIndex, contain_index, color1 } = action.payload;
+      if (contain_index !== undefined) {
+        state.myScreens[screenIndex].lastDroppedItem[index].items[
+          contain_index
+        ].offColor = color1;
+      } else {
+        state.myScreens[screenIndex].lastDroppedItem[index].offColor = color1;
       }
     },
     changeTextAlign: (state, action) => {
@@ -401,7 +544,7 @@ export const screenSlice = createSlice({
       state.myScreens.forEach((element) => {
         element.lastDroppedItem.forEach((item) => {
           item.isSelect = false;
-          if (item.items !== undefined) {
+          if (item.items !== null) {
             item.items.forEach((contain_element) => {
               contain_element.isSelect = false;
             });
@@ -417,6 +560,7 @@ export const screenSlice = createSlice({
     },
     changeContainElementToScreenElement: (state, action) => {
       const { index, inner_index, left, top, screenIndex } = action.payload;
+      console.log("jsakdansjkdnaskdjas");
       state.myScreens[screenIndex].lastDroppedItem[index].items[
         inner_index
       ].left = left;
@@ -483,5 +627,7 @@ export const {
   changeScreenToContainElement,
   changeContainTop,
   changeContainLeft,
+  changeOffColor,
+  changeOnColor,
 } = screenSlice.actions;
 export default screenSlice.reducer;

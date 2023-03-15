@@ -29,6 +29,9 @@ function Element({ item, isDropped }) {
     src,
     resize,
     items,
+    onColor,
+    offColor,
+    value,
   } = item;
   const [{ opacity }, drag] = useDrag(
     () => ({
@@ -60,6 +63,9 @@ function Element({ item, isDropped }) {
         keyboard,
         src,
         resize,
+        onColor,
+        offColor,
+        value,
       },
       collect: (monitor) => ({
         opacity: monitor.isDragging() ? 0.9 : 1,

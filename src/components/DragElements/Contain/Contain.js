@@ -11,11 +11,22 @@ import Button from "../Button";
 import TextInput from "../TextInput";
 import Title from "../Title";
 import Image from "../ImageComp";
+import Loading from "../Loading";
+import Switch from "../Switch";
 import ContainParent from "./ContainParent/ContainParent";
 function Contain({ index, screenIndex }) {
   const dispatch = useDispatch();
   const { myScreens } = useSelector((state) => state.screen);
-  const { top, left, items } = myScreens[screenIndex].lastDroppedItem[index];
+  const {
+    top,
+    left,
+    items,
+    borderColor,
+    borderWidth,
+    borderStyle,
+    borderRedius,
+  } = myScreens[screenIndex].lastDroppedItem[index];
+  console.log();
   const initial_top = top;
   const initial_left = left;
   let width = myScreens[screenIndex].lastDroppedItem[index].width;
@@ -97,6 +108,9 @@ function Contain({ index, screenIndex }) {
               src: item.src,
               resize: item.resize,
               items: item.items,
+              onColor: item.onColor,
+              offColor: item.offColor,
+              value: item.value,
             },
             screenIndex: screenIndex,
             inner_index: index,
@@ -141,6 +155,10 @@ function Contain({ index, screenIndex }) {
         height,
         position: "relative",
         backgroundColor: backgroundColor,
+        borderColor,
+        borderWidth,
+        borderStyle,
+        borderRadius: borderRedius,
       }}
     >
       {items.map(
@@ -186,6 +204,20 @@ function Contain({ index, screenIndex }) {
                   />
                 ) : name === "Image" ? (
                   <Image
+                    screenIndex={screenIndex}
+                    index={index}
+                    isComingContain={true}
+                    contain_index={contain_index}
+                  />
+                ) : name === "Loading" ? (
+                  <Loading
+                    screenIndex={screenIndex}
+                    index={index}
+                    isComingContain={true}
+                    contain_index={contain_index}
+                  />
+                ) : name === "Switch" ? (
+                  <Switch
                     screenIndex={screenIndex}
                     index={index}
                     isComingContain={true}

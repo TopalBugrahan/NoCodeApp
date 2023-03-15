@@ -18,6 +18,8 @@ import Image from "../../components/DragElements/ImageComp";
 import { ItemTypes } from "../../ItemType";
 import Parent from "../../components/DragElements/Parent";
 import Contain from "../../components/DragElements/Contain";
+import Loading from "../../components/DragElements/Loading";
+import Switch from "../../components/DragElements/Switch";
 
 function HomePage() {
   //Benim Sayfam reduxta bulunuyor
@@ -67,7 +69,6 @@ function HomePage() {
               backgroundColor: item.backgroundColor,
               font_size: item.font_size,
               height: item.height,
-              isChange: false,
               left: left,
               name: item.name,
               text: item.text,
@@ -86,11 +87,14 @@ function HomePage() {
               borderStyle: item.borderStyle,
               borderRedius: item.borderRedius,
               hint: item.hint,
-              disabled: item.disablet,
+              disabled: item.disabled,
               keyboard: item.keyboard,
               src: item.src,
               resize: item.resize,
               items: item.items,
+              onColor: item.onColor,
+              offColor: item.offColor,
+              value: item.value,
             },
             index: index,
             inner_index: item.inner_index,
@@ -98,6 +102,7 @@ function HomePage() {
           //Sol bardan ekrana atılacak elementi listeye ekliyor.
           dispatch(addElementToScreen(data));
         } else if (type === "inner_element") {
+          console.log(item);
           if (item.isContain) {
             const { index, inner_index } = item;
             const screenIndex = index1;
@@ -144,7 +149,7 @@ function HomePage() {
               >
                 {lastDroppedItem &&
                   lastDroppedItem.map(
-                    ({ name, left, top, isChange, width, height }, index) => {
+                    ({ name, left, top, width, height }, index) => {
                       return (
                         <div key={index}>
                           <Parent
@@ -157,7 +162,6 @@ function HomePage() {
                             type={ItemTypes.INNER_ELEMENT}
                             index={index}
                             screenIndex={screenIndex}
-                            isChange={isChange}
                           >
                             {name === "Button" ? (
                               <Button index={index} screenIndex={screenIndex} />
@@ -175,6 +179,13 @@ function HomePage() {
                                 index={index}
                                 screenIndex={screenIndex}
                               />
+                            ) : name === "Loading" ? (
+                              <Loading
+                                index={index}
+                                screenIndex={screenIndex}
+                              />
+                            ) : name === "Switch" ? (
+                              <Switch index={index} screenIndex={screenIndex} />
                             ) : null}
                           </Parent>
                         </div>

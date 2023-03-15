@@ -16,7 +16,6 @@ function Parent({
   id,
   index,
   children,
-  isChange,
   screenIndex,
   height,
   width,
@@ -153,7 +152,7 @@ function Parent({
     }
   }, [isHovering]);
 
-  const { drag, isDragging } = Drag(name, type, left, top, index, isChange);
+  const { drag, isDragging } = Drag(name, type, left, top, index);
   const deneme = (e) => {
     if (!e) e = window.event;
     e.cancelBubble = true;

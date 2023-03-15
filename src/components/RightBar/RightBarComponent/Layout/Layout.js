@@ -9,17 +9,16 @@ import {
   changeContainHeight,
   changeContainWidth,
 } from "../../../../redux/Screen/ScreenSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RxWidth, RxHeight } from "react-icons/rx";
-function Layout({
-  screenIndex,
-  index,
-  contain_index,
-  top,
-  left,
-  width,
-  height,
-}) {
+function Layout({ screenIndex, index, contain_index }) {
+  const { myScreens } = useSelector((state) => state.screen);
+
+  let data = myScreens[screenIndex].lastDroppedItem[index];
+  if (contain_index !== undefined) {
+    data = myScreens[screenIndex].lastDroppedItem[index].items[contain_index];
+  }
+  const { width, height, top, left } = data;
   const dispatch = useDispatch();
   return (
     <div
@@ -53,7 +52,7 @@ function Layout({
             className="right_bar_input"
             style={{ width: "50%", height: "30px" }}
             type="number"
-            defaultValue={left}
+            value={left}
             onChange={(e) => {
               const change_left = Number(e.target.value);
               if (contain_index === undefined) {
@@ -85,7 +84,7 @@ function Layout({
             className="right_bar_input"
             style={{ width: "50%", height: "30px" }}
             type="number"
-            defaultValue={top}
+            value={top}
             onChange={(e) => {
               const change_top = Number(e.target.value);
               if (contain_index === undefined) {
@@ -126,7 +125,7 @@ function Layout({
             className="right_bar_input"
             style={{ width: "50%", height: "30px" }}
             type="number"
-            defaultValue={width}
+            value={width}
             onChange={(e) => {
               const width = Number(e.target.value);
               if (contain_index === undefined) {
@@ -158,7 +157,7 @@ function Layout({
             className="right_bar_input"
             style={{ width: "50%", height: "30px" }}
             type="number"
-            defaultValue={height}
+            value={height}
             onChange={(e) => {
               const height = Number(e.target.value);
               if (contain_index === undefined) {

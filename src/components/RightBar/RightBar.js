@@ -28,22 +28,23 @@ function RightBar() {
                 const items = item.items;
                 return (
                   <div>
-                    {items.map((item, contain_index = index) => {
-                      if (item.isSelect) {
-                        return (
-                          <div key={index + "hus"}>
-                            <Form
-                              item={item}
-                              index={index}
-                              screenIndex={screenIndex}
-                              contain_index={contain_index}
-                            />
-                          </div>
-                        );
-                      } else {
-                        return null;
-                      }
-                    })}
+                    {items != null &&
+                      items.map((item, contain_index = index) => {
+                        if (item.isSelect) {
+                          return (
+                            <div key={index + "hus"}>
+                              <Form
+                                item={item}
+                                index={index}
+                                screenIndex={screenIndex}
+                                contain_index={contain_index}
+                              />
+                            </div>
+                          );
+                        } else {
+                          return null;
+                        }
+                      })}
                   </div>
                 );
               } else {

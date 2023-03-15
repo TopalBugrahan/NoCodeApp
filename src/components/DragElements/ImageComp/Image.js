@@ -25,7 +25,7 @@ function Image({ index, screenIndex, isComingContain, contain_index }) {
         style={{
           borderWidth,
           borderStyle,
-          borderRedius,
+          borderRadius: borderRedius,
           borderColor,
           backgroundColor,
           width,

@@ -10,10 +10,6 @@ function Form({ index, screenIndex, item, contain_index }) {
     textDecoration,
     font_weight,
     fontStyle,
-    top,
-    left,
-    height,
-    width,
     font_size,
     borderColor,
     borderWidth,
@@ -26,6 +22,8 @@ function Form({ index, screenIndex, item, contain_index }) {
     disabled,
     resize,
     src,
+    onColor,
+    offColor,
   } = item;
   return (
     <form
@@ -51,16 +49,14 @@ function Form({ index, screenIndex, item, contain_index }) {
         disabled={disabled}
         resize={resize}
         src={src}
+        onColor={onColor}
+        offColor={offColor}
       />
 
       <Layout
         screenIndex={screenIndex}
         index={index}
         contain_index={contain_index}
-        top={top}
-        left={left}
-        height={height}
-        width={width}
       />
       <Style
         screenIndex={screenIndex}
