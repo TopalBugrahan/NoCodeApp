@@ -16,7 +16,7 @@ import Switch from "../Switch";
 import ContainParent from "./ContainParent/ContainParent";
 function Contain({ index, screenIndex }) {
   const dispatch = useDispatch();
-  const { myScreens } = useSelector((state) => state.screen);
+  const { myScreens, nameCount } = useSelector((state) => state.screen);
   const {
     top,
     left,
@@ -78,9 +78,11 @@ function Contain({ index, screenIndex }) {
           screenIndex: screenIndex,
           inner_index: item.inner_index,
         };
+        const newName = item.priviteName + nameCount;
         if (type === "element") {
           const data = {
             item: {
+              priviteName: newName,
               backgroundColor: item.backgroundColor,
               font_size: item.font_size,
               height: item.height,
@@ -103,7 +105,7 @@ function Contain({ index, screenIndex }) {
               borderStyle: item.borderStyle,
               borderRedius: item.borderRedius,
               hint: item.hint,
-              disabled: item.disablet,
+              disabled: item.disabled,
               keyboard: item.keyboard,
               src: item.src,
               resize: item.resize,
@@ -111,6 +113,7 @@ function Contain({ index, screenIndex }) {
               onColor: item.onColor,
               offColor: item.offColor,
               value: item.value,
+              actions: item.actions,
             },
             screenIndex: screenIndex,
             inner_index: index,

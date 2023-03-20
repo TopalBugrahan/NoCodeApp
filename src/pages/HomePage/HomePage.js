@@ -23,8 +23,10 @@ import Switch from "../../components/DragElements/Switch";
 
 function HomePage() {
   //Benim Sayfam reduxta bulunuyor
-  const { myScreens, elements } = useSelector((state) => state.screen);
-  //console.log("MyScreens içi", myScreens);
+  const { myScreens, elements, nameCount } = useSelector(
+    (state) => state.screen
+  );
+  //console.log("MyScreens içi", elements);
   //Benim sol tarafta bulunan elementlerim
   const [element] = useState(elements);
   const [droppedBoxNames, setDroppedBoxNames] = useState([]);
@@ -63,9 +65,11 @@ function HomePage() {
           update(droppedBoxNames, name ? { $push: [name] } : { $push: [] })
         );
         //burada ise screen içine atılan son elemntin ismini veriyor
+        const newName = item.priviteName + nameCount;
         if (type === "element") {
           const data = {
             item: {
+              priviteName: newName,
               backgroundColor: item.backgroundColor,
               font_size: item.font_size,
               height: item.height,
@@ -95,6 +99,7 @@ function HomePage() {
               onColor: item.onColor,
               offColor: item.offColor,
               value: item.value,
+              actions: item.actions,
             },
             index: index,
             inner_index: item.inner_index,
@@ -102,7 +107,6 @@ function HomePage() {
           //Sol bardan ekrana atılacak elementi listeye ekliyor.
           dispatch(addElementToScreen(data));
         } else if (type === "inner_element") {
-          console.log(item);
           if (item.isContain) {
             const { index, inner_index } = item;
             const screenIndex = index1;
@@ -130,7 +134,7 @@ function HomePage() {
   );
   return (
     <div className="app">
-      <LeftBar elements={element} isDropped={isDropped} />
+      <LeftBar elements={element} isDropped={isDropped} myScreens={myScreens} />
       <div className="a">
         <Header onClick={() => dispatch(addOnePage())} />
         <div id="mobile" className="center">

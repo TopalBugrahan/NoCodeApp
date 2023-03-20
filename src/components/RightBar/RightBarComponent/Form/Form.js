@@ -2,6 +2,7 @@ import React from "react";
 import RightBarElement from "../RightBarElement/RightBarElement";
 import Layout from "../Layout/Layout";
 import Style from "../Style/Style";
+import ActionBar from "../ActionBar/ActionBar";
 function Form({ index, screenIndex, item, contain_index }) {
   const {
     name,
@@ -68,6 +69,11 @@ function Form({ index, screenIndex, item, contain_index }) {
         borderWidth={borderWidth}
         backgroundColor={backgroundColor}
         borderRedius={borderRedius}
+      />
+      <ActionBar
+        screenIndex={screenIndex}
+        index={index}
+        contain_index={contain_index}
       />
     </form>
   );

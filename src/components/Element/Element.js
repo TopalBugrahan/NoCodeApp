@@ -32,6 +32,9 @@ function Element({ item, isDropped }) {
     onColor,
     offColor,
     value,
+    priviteName,
+    actions,
+    ali,
   } = item;
   const [{ opacity }, drag] = useDrag(
     () => ({
@@ -66,6 +69,9 @@ function Element({ item, isDropped }) {
         onColor,
         offColor,
         value,
+        priviteName,
+        actions,
+        ali,
       },
       collect: (monitor) => ({
         opacity: monitor.isDragging() ? 0.9 : 1,

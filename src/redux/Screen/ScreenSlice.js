@@ -1,8 +1,9 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, current } from "@reduxjs/toolkit";
 import { ItemTypes } from "../../ItemType";
 export const screenSlice = createSlice({
   name: "screen",
   initialState: {
+    nameCount: 0,
     myScreens: [
       {
         accepts: [ItemTypes.ELEMENT, ItemTypes.INNER_ELEMENT],
@@ -12,6 +13,9 @@ export const screenSlice = createSlice({
     ],
     elements: [
       {
+        meme: "null",
+        actions: [],
+        priviteName: "Button",
         name: "Button",
         type: ItemTypes.ELEMENT,
         top: 0,
@@ -42,6 +46,7 @@ export const screenSlice = createSlice({
         value: null,
       },
       {
+        priviteName: "Title",
         name: "Title",
         type: ItemTypes.ELEMENT,
         width: 70,
@@ -60,6 +65,7 @@ export const screenSlice = createSlice({
         borderWidth: 0,
         borderStyle: "solid",
         borderRedius: 0,
+        actions: [],
         //
         disabled: null,
         hint: null,
@@ -72,6 +78,7 @@ export const screenSlice = createSlice({
         value: null,
       },
       {
+        priviteName: "Text Input",
         name: "Text Input",
         type: ItemTypes.ELEMENT,
         top: 0,
@@ -89,6 +96,7 @@ export const screenSlice = createSlice({
         borderWidth: 1,
         borderStyle: "solid",
         borderRedius: 0,
+        actions: [],
         //
         fontStyle: null,
         font_weight: null,
@@ -102,6 +110,7 @@ export const screenSlice = createSlice({
         value: null,
       },
       {
+        priviteName: "Image",
         name: "Image",
         type: ItemTypes.ELEMENT,
         top: 0,
@@ -114,6 +123,7 @@ export const screenSlice = createSlice({
         borderWidth: 1,
         borderStyle: "solid",
         borderRedius: 0,
+        actions: [],
         //
         disabled: null,
         font_size: null,
@@ -132,6 +142,7 @@ export const screenSlice = createSlice({
         backgroundColor: "white",
       },
       {
+        priviteName: "Contain",
         name: "Contain",
         type: ItemTypes.ELEMENT,
         top: 0,
@@ -144,6 +155,7 @@ export const screenSlice = createSlice({
         borderStyle: "solid",
         borderRedius: 0,
         items: [],
+        actions: [],
         //
         disabled: null,
         font_weight: null,
@@ -162,6 +174,7 @@ export const screenSlice = createSlice({
         value: null,
       },
       {
+        priviteName: "Loading",
         name: "Loading",
         type: ItemTypes.ELEMENT,
         top: 0,
@@ -174,6 +187,7 @@ export const screenSlice = createSlice({
         borderWidth: 0,
         borderStyle: "solid",
         borderRedius: 0,
+        actions: [],
         //
         disabled: null,
         items: null,
@@ -188,11 +202,11 @@ export const screenSlice = createSlice({
         src: null,
         text: null,
         text_align: null,
-        text_color: null,
         textDecoration: null,
         value: null,
       },
       {
+        priviteName: "Switch",
         name: "Switch",
         type: ItemTypes.ELEMENT,
         top: 0,
@@ -209,6 +223,7 @@ export const screenSlice = createSlice({
         borderRedius: 0,
         onColor: "#00FF00",
         offColor: "#808080",
+        actions: [],
         //
         font_weight: null,
         fontStyle: null,
@@ -226,6 +241,7 @@ export const screenSlice = createSlice({
   },
   reducers: {
     addOnePage: (state) => {
+      state.nameCount++;
       state.myScreens = [
         ...state.myScreens,
         {
@@ -235,6 +251,7 @@ export const screenSlice = createSlice({
       ];
     },
     addElementToScreen: (state, action) => {
+      state.nameCount++;
       state.myScreens[action.payload.index].lastDroppedItem = [
         ...state.myScreens[action.payload.index].lastDroppedItem,
         action.payload.item,
@@ -508,6 +525,7 @@ export const screenSlice = createSlice({
       }
     },
     addElementToContain: (state, action) => {
+      state.nameCount++;
       state.myScreens[action.payload.screenIndex].lastDroppedItem[
         action.payload.inner_index
       ].items = [
@@ -560,7 +578,6 @@ export const screenSlice = createSlice({
     },
     changeContainElementToScreenElement: (state, action) => {
       const { index, inner_index, left, top, screenIndex } = action.payload;
-      console.log("jsakdansjkdnaskdjas");
       state.myScreens[screenIndex].lastDroppedItem[index].items[
         inner_index
       ].left = left;
@@ -568,7 +585,7 @@ export const screenSlice = createSlice({
         inner_index
       ].top = top;
       state.myScreens[screenIndex].lastDroppedItem = [
-        ...state.myScreens[index].lastDroppedItem,
+        ...state.myScreens[screenIndex].lastDroppedItem,
         state.myScreens[screenIndex].lastDroppedItem[index].items[inner_index],
       ];
       state.myScreens[screenIndex].lastDroppedItem[index].items.splice(
@@ -585,6 +602,60 @@ export const screenSlice = createSlice({
         state.myScreens[screenIndex].lastDroppedItem[inner_index],
       ];
       state.myScreens[screenIndex].lastDroppedItem.splice(inner_index, 1);
+    },
+    deleteElement: (state, action) => {
+      const { screenIndex, index, contain_index } = action.payload;
+      if (contain_index !== undefined) {
+        state.myScreens[screenIndex].lastDroppedItem[index].items.splice(
+          contain_index,
+          1
+        );
+      } else {
+        state.myScreens[screenIndex].lastDroppedItem.splice(index, 1);
+      }
+    },
+    addAction: (state, action) => {
+      const { screenIndex, index, contain_index } = action.payload;
+      if (contain_index === "undefined") {
+        state.myScreens[screenIndex].lastDroppedItem[index].actions = [
+          ...state.myScreens[screenIndex].lastDroppedItem[index].actions,
+          { action: "click", visibility: "hidden", route: null },
+        ];
+      } else {
+        state.myScreens[screenIndex].lastDroppedItem[index].items[
+          contain_index
+        ].actions = [
+          ...state.myScreens[screenIndex].lastDroppedItem[index].items[
+            contain_index
+          ].actions,
+          { action: "click", visibility: "hidden", route: null },
+        ];
+      }
+    },
+    changeVisibility: (state, action) => {
+      const { screenIndex, index, contain_index, action_index } =
+        action.payload;
+      let data = state.myScreens[screenIndex].lastDroppedItem[index];
+      console.log(current(data));
+      console.log(screenIndex, index, typeof contain_index, action_index);
+      if (contain_index !== "undefined") {
+        data =
+          state.myScreens[screenIndex].lastDroppedItem[index].items[
+            contain_index
+          ];
+      }
+      data.actions.forEach(({ visibility }, index) => {
+        if (index === action_index) {
+          if (data.actions[action_index].visibility === "visible") {
+            data.actions[action_index].visibility = "hidden";
+          } else {
+            data.actions[action_index].visibility = "visible";
+          }
+        } else {
+          data.actions[index].visibility = "hidden";
+        }
+      });
+      console.log(current(data));
     },
   },
 });
@@ -629,5 +700,8 @@ export const {
   changeContainLeft,
   changeOffColor,
   changeOnColor,
+  deleteElement,
+  addAction,
+  changeVisibility,
 } = screenSlice.actions;
 export default screenSlice.reducer;

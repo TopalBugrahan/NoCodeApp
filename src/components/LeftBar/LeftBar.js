@@ -1,6 +1,6 @@
 import React from "react";
 import Element from "../Element";
-function LeftBar({ elements, isDropped }) {
+function LeftBar({ elements, isDropped, myScreens }) {
   return (
     <div className="leftbar_container">
       {elements.map((item, index) => (

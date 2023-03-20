@@ -214,3 +214,111 @@ code {
   font-size: 50px;
   font-weight: bold;
 }
+
+.ActionBar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.DeleteButton {
+  width: 75%;
+  height: 30px;
+  background-color: red;
+  color: white;
+  border-radius: 10px;
+  border: #909090 1px solid;
+  margin: 5px;
+}
+
+.NavigationButton {
+  width: 75%;
+  height: 30px;
+  background-color: #1565C0;
+  color: white;
+  border-radius: 10px;
+  border: #909090 1px solid;
+  margin: 5px;
+}
+
+.action_page_title {
+  font-size: 20px;
+  text-align: center;
+}
+
+.action_page_priviteName {
+  font-weight: bold;
+}
+
+.action_page_body {
+  margin: 40px;
+}
+
+.action_element_container {
+  display: flex;
+  padding: 10px;
+}
+
+.action_list {
+  display: flex;
+}
+
+.action_list_element {
+  cursor: pointer;
+  margin: 10px;
+  height: 200px;
+  width: 200px;
+  background-color: #909090;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.action_maker {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: 10px;
+  height: 200px;
+  width: 200px;
+  min-width: 200px;
+  background-color: #d7d4d4;
+  cursor: pointer;
+}
+
+.event_list {
+  display: flex;
+  background-color: aqua;
+  margin: 10px;
+  justify-content: space-between;
+  position: absolute;
+  width: 270px;
+}
+
+.event_list_left {
+  width: 40%;
+}
+
+.event_list_right {
+  width: 60%;
+}
+
+.js-is-hidden {
+  display: none;
+}
+
+::-webkit-scrollbar {
+  height: 5px;
+  background-color: #909090;
+}
+
+::-webkit-scrollbar-thumb {
+  background: yellow;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: blue;
+}
