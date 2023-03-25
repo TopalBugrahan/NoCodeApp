@@ -16,7 +16,7 @@ function RightBar() {
               if (item.items !== undefined) {
                 if (item.isSelect) {
                   return (
-                    <div key={index + "bura"}>
+                    <div key={item.priviteName}>
                       <Form
                         item={item}
                         index={index}
@@ -27,12 +27,12 @@ function RightBar() {
                 }
                 const items = item.items;
                 return (
-                  <div>
+                  <div key={item.priviteName}>
                     {items != null &&
                       items.map((item, contain_index = index) => {
                         if (item.isSelect) {
                           return (
-                            <div key={index + "hus"}>
+                            <div key={item.priviteName}>
                               <Form
                                 item={item}
                                 index={index}
@@ -50,7 +50,7 @@ function RightBar() {
               } else {
                 if (item.isSelect) {
                   return (
-                    <div key={index + "eve"}>
+                    <div key={item.priviteName}>
                       <Form
                         item={item}
                         index={index}

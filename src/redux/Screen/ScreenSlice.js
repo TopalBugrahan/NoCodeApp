@@ -4,8 +4,10 @@ export const screenSlice = createSlice({
   name: "screen",
   initialState: {
     nameCount: 0,
+    screenCount: 0,
     myScreens: [
       {
+        name: "Screen",
         accepts: [ItemTypes.ELEMENT, ItemTypes.INNER_ELEMENT],
         lastDroppedItem: [],
         count: 0,
@@ -242,13 +244,16 @@ export const screenSlice = createSlice({
   reducers: {
     addOnePage: (state) => {
       state.nameCount++;
+
       state.myScreens = [
         ...state.myScreens,
         {
+          name: "Screen" + state.screenCount,
           accepts: [ItemTypes.ELEMENT, ItemTypes.INNER_ELEMENT],
           lastDroppedItem: [],
         },
       ];
+      state.screenCount++;
     },
     addElementToScreen: (state, action) => {
       state.nameCount++;
@@ -617,9 +622,18 @@ export const screenSlice = createSlice({
     addAction: (state, action) => {
       const { screenIndex, index, contain_index } = action.payload;
       if (contain_index === "undefined") {
+        console.log(
+          current(state.myScreens[screenIndex].lastDroppedItem[index].actions)
+        );
         state.myScreens[screenIndex].lastDroppedItem[index].actions = [
           ...state.myScreens[screenIndex].lastDroppedItem[index].actions,
-          { action: "click", visibility: "hidden", route: null },
+          {
+            action: "click",
+            visibility: "hidden",
+            event: null,
+            route: null,
+            params: null,
+          },
         ];
       } else {
         state.myScreens[screenIndex].lastDroppedItem[index].items[
@@ -628,7 +642,21 @@ export const screenSlice = createSlice({
           ...state.myScreens[screenIndex].lastDroppedItem[index].items[
             contain_index
           ].actions,
-          { action: "click", visibility: "hidden", route: null },
+          {
+            action: "click",
+            visibility: "hidden",
+            event: null,
+            route: null,
+            params: {
+              selectEmail: null,
+              selectPassport: null,
+              backgroundColor: null,
+              width: null,
+              height: null,
+              top: null,
+              left: null,
+            },
+          },
         ];
       }
     },
@@ -636,8 +664,6 @@ export const screenSlice = createSlice({
       const { screenIndex, index, contain_index, action_index } =
         action.payload;
       let data = state.myScreens[screenIndex].lastDroppedItem[index];
-      console.log(current(data));
-      console.log(screenIndex, index, typeof contain_index, action_index);
       if (contain_index !== "undefined") {
         data =
           state.myScreens[screenIndex].lastDroppedItem[index].items[
@@ -655,7 +681,41 @@ export const screenSlice = createSlice({
           data.actions[index].visibility = "hidden";
         }
       });
-      console.log(current(data));
+    },
+    selectAction: (state, action) => {
+      console.log("action");
+      const { screenIndex, index, contain_index, action_index, event, params } =
+        action.payload;
+      let data = state.myScreens[screenIndex].lastDroppedItem[index];
+      if (contain_index !== "undefined") {
+        data =
+          state.myScreens[screenIndex].lastDroppedItem[index].items[
+            contain_index
+          ];
+      }
+      data.actions[action_index].route = null;
+      data.actions[action_index].event = event;
+      data.actions[action_index].params = params;
+      console.log(
+        current(state.myScreens[screenIndex].lastDroppedItem[index].actions)
+      );
+    },
+    selectRoute: (state, action) => {
+      console.log("router");
+      const { screenIndex, index, contain_index, action_index, route } =
+        action.payload;
+      console.log(screenIndex, index, contain_index, action_index, route);
+      let data = state.myScreens[screenIndex].lastDroppedItem[index];
+      if (contain_index !== "undefined") {
+        data =
+          state.myScreens[screenIndex].lastDroppedItem[index].items[
+            contain_index
+          ];
+      }
+      data.actions[action_index].route = route;
+      console.log(
+        current(state.myScreens[screenIndex].lastDroppedItem[index].actions)
+      );
     },
   },
 });
@@ -703,5 +763,7 @@ export const {
   deleteElement,
   addAction,
   changeVisibility,
+  selectAction,
+  selectRoute,
 } = screenSlice.actions;
 export default screenSlice.reducer;

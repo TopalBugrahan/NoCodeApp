@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import ActionEventList from "./ActionEventList";
 import { changeVisibility } from "../../../redux/Screen/ScreenSlice";
 function ActionListElement({
+  inputTexts,
   action_index,
   item,
   screenIndex,
@@ -24,6 +25,10 @@ function ActionListElement({
     setSelect("costum");
   };
   const handleClick = (action_index) => {
+    const docs = document.getElementsByClassName("action_select_absolute");
+    for (var i = 0, len = docs.length; i < len; i++) {
+      docs[i].style.visibility = "hidden";
+    }
     dispatch(
       changeVisibility({ screenIndex, index, contain_index, action_index })
     );
@@ -36,10 +41,22 @@ function ActionListElement({
         }}
         className="action_list_element"
       >
-        Click Action
+        <div className="action_list_element_body">
+          <p>Click Action</p>
+          {item.event !== null ? (
+            <p>{item.event}</p>
+          ) : (
+            <p>You not selected event</p>
+          )}
+        </div>
       </div>
       <div>
         <ActionEventList
+          inputTexts={inputTexts}
+          screenIndex={screenIndex}
+          index={index}
+          contain_index={contain_index}
+          action_index={action_index}
           visibility={item.visibility}
           selectAccount={selectAccount}
           selectNavigation={selectNavigation}

@@ -51,6 +51,7 @@ code {
   display: flex;
   align-items: center;
   height: 94vh;
+  background-color: #C0C0C0;
 }
 
 .page_button {
@@ -290,11 +291,13 @@ code {
 
 .event_list {
   display: flex;
-  background-color: aqua;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #505659;
   margin: 10px;
   justify-content: space-between;
   position: absolute;
-  width: 270px;
+  min-width: 300px;
 }
 
 .event_list_left {
@@ -321,4 +324,87 @@ code {
 
 ::-webkit-scrollbar-thumb:hover {
   background: blue;
+}
+
+.action_select_container {
+  margin: 5px;
+  cursor: pointer;
+}
+
+
+.action_list_element_body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.action_select_container_account {
+  margin: 5px;
+  position: relative;
+
+}
+
+
+
+.action_select_container_account:hover .action_select_absolute {
+  visibility: visible;
+}
+
+.action_select_absolute {
+  position: absolute;
+  left: 110%;
+  top: 0px;
+  visibility: hidden;
+  min-width: 300px;
+}
+
+
+.sign_in_for_account {
+
+  border-radius: 10px;
+  background-color: #606669;
+}
+
+.select_action {
+  margin-left: 5px;
+  background-color: #505659;
+  color: aliceblue;
+  padding: 3px;
+}
+
+.button_account {
+  padding: 10px;
+  background-color: #505659;
+  color: aliceblue;
+  border: aliceblue solid 1px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.event_button {
+  background-color: #505659;
+  border: none;
+  color: aliceblue;
+  font-size: 15px;
+  width: 100%;
+  text-align: start;
+}
+
+.event_button:hover {
+  background-color: #606669;
+}
+
+.event_button1 {
+  background-color: #505659;
+  border: none;
+  color: aliceblue;
+  font-size: 15px;
+  width: 100%;
+  margin-top: 7px;
+  text-align: start;
+}
+
+.event_button1:hover {
+  background-color: #606669;
 }

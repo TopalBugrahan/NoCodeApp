@@ -23,10 +23,10 @@ import Switch from "../../components/DragElements/Switch";
 
 function HomePage() {
   //Benim Sayfam reduxta bulunuyor
-  const { myScreens, elements, nameCount } = useSelector(
+  const { myScreens, elements, nameCount, screenCount } = useSelector(
     (state) => state.screen
   );
-  //console.log("MyScreens içi", elements);
+  //console.log("MyScreens içi", myScreens);
   //Benim sol tarafta bulunan elementlerim
   const [element] = useState(elements);
   const [droppedBoxNames, setDroppedBoxNames] = useState([]);
@@ -136,7 +136,7 @@ function HomePage() {
     <div className="app">
       <LeftBar elements={element} isDropped={isDropped} myScreens={myScreens} />
       <div className="a">
-        <Header onClick={() => dispatch(addOnePage())} />
+        <Header onClick={() => dispatch(addOnePage({ screenCount }))} />
         <div id="mobile" className="center">
           {myScreens.map(({ accepts, lastDroppedItem }, index) => {
             //screen içine birşeyler gelebilir

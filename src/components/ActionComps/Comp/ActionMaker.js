@@ -3,7 +3,6 @@ import { useDispatch } from "react-redux";
 import { addAction } from "../../../redux/Screen/ScreenSlice";
 import { IoAddCircleOutline } from "react-icons/io5";
 function ActionMaker({ screenIndex, index, contain_index }) {
-  console.log("action maker page");
   const dispatch = useDispatch();
   const createAction = (e) => {
     e.preventDefault();
