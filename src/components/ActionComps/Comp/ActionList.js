@@ -4,20 +4,40 @@ import ActionListElement from "./ActionListElement";
 function ActionList({ actionData, screenIndex, index, contain_index }) {
   const { myScreens } = useSelector((state) => state.screen);
   const [inputTexts, setInputTexts] = useState([]);
+  const [titles, setTitles] = useState([]);
+  const [allElement, setAllElement] = useState([]);
   useEffect(() => {
     let data = [];
-    myScreens.forEach((item) => {
-      item.lastDroppedItem.forEach((item) => {
+    let titleData = [];
+    let allData = [];
+    myScreens.forEach((item, screenIndex) => {
+      item.lastDroppedItem.forEach((item, index) => {
         if (item.items !== null) {
-          item.items.forEach((item) => {
+          item.items.forEach((item, contain_index) => {
+            allData.push({
+              name: item.priviteName,
+              screenIndex,
+              index,
+              contain_index,
+            });
             if (item.name === "Text Input") data.push(item.priviteName);
+            if (item.name === "Title") titleData.push(item.priviteName);
           });
         } else {
+          allData.push({
+            name: item.priviteName,
+            screenIndex,
+            index,
+            contain_index,
+          });
           if (item.name === "Text Input") data.push(item.priviteName);
+          if (item.name === "Title") titleData.push(item.priviteName);
         }
       });
     });
     setInputTexts(data);
+    setTitles(titleData);
+    setAllElement(allData);
   }, []);
   return (
     <div className="action_list">
@@ -25,7 +45,9 @@ function ActionList({ actionData, screenIndex, index, contain_index }) {
         return (
           <div key={action_index}>
             <ActionListElement
+              allElement={allElement}
               inputTexts={inputTexts}
+              titles={titles}
               item={item}
               screenIndex={screenIndex}
               index={index}

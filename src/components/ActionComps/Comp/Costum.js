@@ -6,8 +6,16 @@ import {
 } from "../../../redux/Screen/ScreenSlice";
 import ColorElement from "./ColorElement";
 import { IoClose } from "react-icons/io5";
-function Costum({ screenIndex, index, contain_index, action_index }) {
+function Costum({
+  screenIndex,
+  index,
+  contain_index,
+  action_index,
+  allElement,
+}) {
+  const [selectedElement, setSelectedElement] = useState(null);
   const [isBackgroundVisible, setBackgroundVisible] = useState(false);
+  const [isVisibilityVisible, setVisibilityVisible] = useState(false);
   const [isTopVisible, setTopVisible] = useState(false);
   const [isLeftVisible, setLeftVisible] = useState(false);
   const [isWidthVisible, setWidtgVisible] = useState(false);
@@ -19,7 +27,22 @@ function Costum({ screenIndex, index, contain_index, action_index }) {
   const [top, setTop] = useState();
   const [left, setLeft] = useState();
   const dispatch = useDispatch();
+  function changeVisibilityVisible() {
+    const defaultInput = allElement.length > 0 ? allElement[0] : null;
+    console.log(defaultInput);
+    setSelectedElement(defaultInput);
+    setTopVisible(false);
+    setLeftVisible(false);
+    setWidtgVisible(false);
+    setHeightVisible(false);
+    setBackgroundVisible(false);
+    setVisibilityVisible(!isVisibilityVisible);
+  }
   function changeWidthVisible() {
+    const defaultInput = allElement.length > 0 ? allElement[0] : null;
+    console.log(defaultInput);
+    setSelectedElement(defaultInput);
+    setVisibilityVisible(false);
     setTopVisible(false);
     setLeftVisible(false);
     setWidtgVisible(!isWidthVisible);
@@ -27,6 +50,9 @@ function Costum({ screenIndex, index, contain_index, action_index }) {
     setBackgroundVisible(false);
   }
   function changeHeightVisible() {
+    const defaultInput = allElement.length > 0 ? allElement[0] : null;
+    setSelectedElement(defaultInput);
+    setVisibilityVisible(false);
     setTopVisible(false);
     setLeftVisible(false);
     setWidtgVisible(false);
@@ -34,6 +60,9 @@ function Costum({ screenIndex, index, contain_index, action_index }) {
     setBackgroundVisible(false);
   }
   function changeTopVisible() {
+    const defaultInput = allElement.length > 0 ? allElement[0] : null;
+    setSelectedElement(defaultInput);
+    setVisibilityVisible(false);
     setTopVisible(!isTopVisible);
     setLeftVisible(false);
     setWidtgVisible(false);
@@ -41,6 +70,9 @@ function Costum({ screenIndex, index, contain_index, action_index }) {
     setBackgroundVisible(false);
   }
   function changeLeftVisible() {
+    const defaultInput = allElement.length > 0 ? allElement[0] : null;
+    setSelectedElement(defaultInput);
+    setVisibilityVisible(false);
     setTopVisible(false);
     setLeftVisible(!isLeftVisible);
     setWidtgVisible(false);
@@ -48,13 +80,45 @@ function Costum({ screenIndex, index, contain_index, action_index }) {
     setBackgroundVisible(false);
   }
   function handleMouseEnter() {
+    const defaultInput = allElement.length > 0 ? allElement[0] : null;
+    setSelectedElement(defaultInput);
+    setVisibilityVisible(false);
     setTopVisible(false);
     setLeftVisible(false);
     setWidtgVisible(false);
     setHeightVisible(false);
     setBackgroundVisible(!isBackgroundVisible);
   }
+
+  function visibilityEvent() {
+    const event = "visibility";
+    dispatch(
+      selectAction({
+        screenIndex,
+        index,
+        contain_index,
+        action_index,
+        event,
+        params: {
+          selectEmail: null,
+          selectPassport: null,
+          selectTitle: null,
+          selectCostum: selectedElement,
+          backgroundColor: null,
+          width: null,
+          height: null,
+          top: null,
+          left: null,
+        },
+      })
+    );
+    dispatch(
+      changeVisibility({ screenIndex, index, contain_index, action_index })
+    );
+    setVisibilityVisible(false);
+  }
   function backgroundEvent() {
+    console.log(selectedElement);
     const event = "backgroundColor";
     dispatch(
       selectAction({
@@ -66,6 +130,8 @@ function Costum({ screenIndex, index, contain_index, action_index }) {
         params: {
           selectEmail: null,
           selectPassport: null,
+          selectTitle: null,
+          selectCostum: selectedElement,
           backgroundColor: color,
           width: null,
           height: null,
@@ -81,6 +147,7 @@ function Costum({ screenIndex, index, contain_index, action_index }) {
   }
   function widthEvent() {
     const event = "width";
+    console.log(selectedElement);
     dispatch(
       selectAction({
         screenIndex,
@@ -91,6 +158,8 @@ function Costum({ screenIndex, index, contain_index, action_index }) {
         params: {
           selectEmail: null,
           selectPassport: null,
+          selectTitle: null,
+          selectCostum: selectedElement,
           backgroundColor: null,
           width,
           height: null,
@@ -116,6 +185,8 @@ function Costum({ screenIndex, index, contain_index, action_index }) {
         params: {
           selectEmail: null,
           selectPassport: null,
+          selectCostum: selectedElement,
+          selectTitle: null,
           backgroundColor: null,
           width: null,
           height,
@@ -141,6 +212,8 @@ function Costum({ screenIndex, index, contain_index, action_index }) {
         params: {
           selectEmail: null,
           selectPassport: null,
+          selectCostum: selectedElement,
+          selectTitle: null,
           backgroundColor: null,
           width: null,
           height: null,
@@ -166,6 +239,8 @@ function Costum({ screenIndex, index, contain_index, action_index }) {
         params: {
           selectEmail: null,
           selectPassport: null,
+          selectCostum: selectedElement,
+          selectTitle: null,
           backgroundColor: null,
           width: null,
           height: null,
@@ -217,6 +292,34 @@ function Costum({ screenIndex, index, contain_index, action_index }) {
               />
             </div>
             <div style={{ padding: "10px" }}>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  padding: "5px",
+                }}
+              >
+                <span style={{ color: "white" }}>Select Your Element </span>
+                <select
+                  onChange={(e) => {
+                    setSelectedElement(JSON.parse(e.target.value));
+                  }}
+                  className="select_action"
+                >
+                  {allElement.length > 0 ? (
+                    allElement.map((item, index) => {
+                      const key = "SignEmail" + index;
+                      return (
+                        <option key={key} value={JSON.stringify(item)}>
+                          {item.name}
+                        </option>
+                      );
+                    })
+                  ) : (
+                    <option value={null}>Projenizde hiç input yok </option>
+                  )}
+                </select>
+              </div>
               <div
                 style={{
                   display: "flex",
@@ -291,6 +394,34 @@ function Costum({ screenIndex, index, contain_index, action_index }) {
                   padding: "5px",
                 }}
               >
+                <span style={{ color: "white" }}>Select Your Element </span>
+                <select
+                  onChange={(e) => {
+                    setSelectedElement(JSON.parse(e.target.value));
+                  }}
+                  className="select_action"
+                >
+                  {allElement.length > 0 ? (
+                    allElement.map((item, index) => {
+                      const key = "SignEmail" + index;
+                      return (
+                        <option key={key} value={JSON.stringify(item)}>
+                          {item.name}
+                        </option>
+                      );
+                    })
+                  ) : (
+                    <option value={null}>Projenizde hiç input yok </option>
+                  )}
+                </select>
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  padding: "5px",
+                }}
+              >
                 <span style={{ color: "white" }}>Choose Height:</span>
                 <input
                   type="number"
@@ -349,6 +480,34 @@ function Costum({ screenIndex, index, contain_index, action_index }) {
               />
             </div>
             <div style={{ padding: "10px" }}>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  padding: "5px",
+                }}
+              >
+                <span style={{ color: "white" }}>Select Your Element </span>
+                <select
+                  onChange={(e) => {
+                    setSelectedElement(JSON.parse(e.target.value));
+                  }}
+                  className="select_action"
+                >
+                  {allElement.length > 0 ? (
+                    allElement.map((item, index) => {
+                      const key = "SignEmail" + index;
+                      return (
+                        <option key={key} value={JSON.stringify(item)}>
+                          {item.name}
+                        </option>
+                      );
+                    })
+                  ) : (
+                    <option value={null}>Projenizde hiç input yok </option>
+                  )}
+                </select>
+              </div>
               <div
                 style={{
                   display: "flex",
@@ -421,6 +580,34 @@ function Costum({ screenIndex, index, contain_index, action_index }) {
                   padding: "5px",
                 }}
               >
+                <span style={{ color: "white" }}>Select Your Element </span>
+                <select
+                  onChange={(e) => {
+                    setSelectedElement(JSON.parse(e.target.value));
+                  }}
+                  className="select_action"
+                >
+                  {allElement.length > 0 ? (
+                    allElement.map((item, index) => {
+                      const key = "SignEmail" + index;
+                      return (
+                        <option key={key} value={JSON.stringify(item)}>
+                          {item.name}
+                        </option>
+                      );
+                    })
+                  ) : (
+                    <option value={null}>Projenizde hiç input yok </option>
+                  )}
+                </select>
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  padding: "5px",
+                }}
+              >
                 <span style={{ color: "white" }}>Choose Left Pixel:</span>
                 <input
                   type="number"
@@ -438,6 +625,87 @@ function Costum({ screenIndex, index, contain_index, action_index }) {
                 }}
               >
                 <button className="button_account" onClick={leftEvent}>
+                  Kaydet
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/*sınır*/}
+      <div className="action_select_container_account">
+        <button className="event_button" onClick={changeVisibilityVisible}>
+          Change Visibility
+        </button>
+        <div
+          className={"action_select_absolute"}
+          style={
+            isVisibilityVisible
+              ? { visibility: "visible" }
+              : { visibility: "hidden" }
+          }
+        >
+          <div className="sign_in_for_account">
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "center",
+                backgroundColor: "#283032",
+                borderTopLeftRadius: "10px",
+                borderTopRightRadius: "10px",
+                padding: "5px",
+              }}
+            >
+              <span style={{ color: "white" }}>Change Visibility</span>
+              <IoClose
+                size="25"
+                color="white"
+                onClick={(e) => {
+                  setVisibilityVisible(false);
+                }}
+              />
+            </div>
+            <div style={{ padding: "10px" }}>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  padding: "5px",
+                }}
+              >
+                <span style={{ color: "white" }}>Select Your Element </span>
+                <select
+                  onChange={(e) => {
+                    setSelectedElement(JSON.parse(e.target.value));
+                  }}
+                  className="select_action"
+                >
+                  {allElement.length > 0 ? (
+                    allElement.map((item, index) => {
+                      const key = "SignEmail" + index;
+                      return (
+                        <option key={key} value={JSON.stringify(item)}>
+                          {item.name}
+                        </option>
+                      );
+                    })
+                  ) : (
+                    <option value={null}>Projenizde hiç input yok </option>
+                  )}
+                </select>
+              </div>
+
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  marginTop: "20px",
+                }}
+              >
+                <button className="button_account" onClick={visibilityEvent}>
                   Kaydet
                 </button>
               </div>
@@ -483,6 +751,35 @@ function Costum({ screenIndex, index, contain_index, action_index }) {
               />
             </div>
             <div style={{ padding: "10px" }}>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  padding: "5px",
+                }}
+              >
+                <span style={{ color: "white" }}>Select Your Element </span>
+                <select
+                  onChange={(e) => {
+                    console.log("bac", e.target.value);
+                    setSelectedElement(JSON.parse(e.target.value));
+                  }}
+                  className="select_action"
+                >
+                  {allElement.length > 0 ? (
+                    allElement.map((item, index) => {
+                      const key = "SignEmail" + index;
+                      return (
+                        <option key={key} value={JSON.stringify(item)}>
+                          {item.name}
+                        </option>
+                      );
+                    })
+                  ) : (
+                    <option value={null}>Projenizde hiç input yok </option>
+                  )}
+                </select>
+              </div>
               <div
                 style={{
                   display: "flex",

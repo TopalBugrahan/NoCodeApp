@@ -12,6 +12,7 @@ function Switch({
   offColor,
   onColor,
   text_color,
+  priviteName,
 }) {
   return (
     <div
@@ -22,7 +23,7 @@ function Switch({
         padding: "10px",
       }}
     >
-      {name}
+      {priviteName}
       <ColorElement
         screenIndex={screenIndex}
         index={index}

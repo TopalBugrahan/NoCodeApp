@@ -23,11 +23,12 @@ import Switch from "../../components/DragElements/Switch";
 
 function HomePage() {
   //Benim Sayfam reduxta bulunuyor
-  const { myScreens, elements, nameCount, screenCount } = useSelector(
+  const { myScreens, elements, screenCount } = useSelector(
     (state) => state.screen
   );
   //console.log("MyScreens içi", myScreens);
   //Benim sol tarafta bulunan elementlerim
+
   const [element] = useState(elements);
   const [droppedBoxNames, setDroppedBoxNames] = useState([]);
   //Redux'ta bulunan fonksiyonları çağırmak için
@@ -65,8 +66,9 @@ function HomePage() {
           update(droppedBoxNames, name ? { $push: [name] } : { $push: [] })
         );
         //burada ise screen içine atılan son elemntin ismini veriyor
-        const newName = item.priviteName + nameCount;
+        const newName = item.priviteName + item.nameCount;
         if (type === "element") {
+          console.log("home page drop");
           const data = {
             item: {
               priviteName: newName,
@@ -100,6 +102,7 @@ function HomePage() {
               offColor: item.offColor,
               value: item.value,
               actions: item.actions,
+              visibility: item.visibility,
             },
             index: index,
             inner_index: item.inner_index,
@@ -138,67 +141,73 @@ function HomePage() {
       <div className="a">
         <Header onClick={() => dispatch(addOnePage({ screenCount }))} />
         <div id="mobile" className="center">
-          {myScreens.map(({ accepts, lastDroppedItem }, index) => {
-            //screen içine birşeyler gelebilir
-            const screenIndex = index;
-            return (
-              <Screen
-                id={index}
-                accept={accepts}
-                lastDroppedItem={lastDroppedItem}
-                onDrop={(item, monitor) =>
-                  handleDrop(index, item, dispatch, monitor)
-                }
-                key={index}
-              >
-                {lastDroppedItem &&
-                  lastDroppedItem.map(
-                    ({ name, left, top, width, height }, index) => {
+          {myScreens.map(
+            (
+              { accepts, lastDroppedItem, backgroundColor, backgroundImage },
+              index
+            ) => {
+              //screen içine birşeyler gelebilir
+              const screenIndex = index;
+              return (
+                <Screen
+                  id={index}
+                  accept={accepts}
+                  lastDroppedItem={lastDroppedItem}
+                  onDrop={(item, monitor) =>
+                    handleDrop(index, item, dispatch, monitor)
+                  }
+                  key={index}
+                  backgroundColor={backgroundColor}
+                  backgroundImage={backgroundImage}
+                >
+                  {lastDroppedItem &&
+                    lastDroppedItem.map((item, index) => {
                       return (
                         <div key={index}>
                           <Parent
-                            width={width}
-                            height={height}
-                            left={left}
-                            top={top}
+                            width={item.width}
+                            height={item.height}
+                            left={item.left}
+                            top={item.top}
                             id={index}
-                            name={name}
+                            name={item.name}
                             type={ItemTypes.INNER_ELEMENT}
                             index={index}
                             screenIndex={screenIndex}
                           >
-                            {name === "Button" ? (
+                            {item.name === "Button" ? (
                               <Button index={index} screenIndex={screenIndex} />
-                            ) : name === "Title" ? (
+                            ) : item.name === "Title" ? (
                               <Title index={index} screenIndex={screenIndex} />
-                            ) : name === "Text Input" ? (
+                            ) : item.name === "Text Input" ? (
                               <TextInput
                                 index={index}
                                 screenIndex={screenIndex}
                               />
-                            ) : name === "Image" ? (
+                            ) : item.name === "Image" ? (
                               <Image index={index} screenIndex={screenIndex} />
-                            ) : name === "Contain" ? (
+                            ) : item.name === "Contain" ? (
                               <Contain
                                 index={index}
                                 screenIndex={screenIndex}
+                                item={item}
                               />
-                            ) : name === "Loading" ? (
+                            ) : item.name === "Loading" ? (
                               <Loading
                                 index={index}
                                 screenIndex={screenIndex}
                               />
-                            ) : name === "Switch" ? (
+                            ) : item.name === "Switch" ? (
                               <Switch index={index} screenIndex={screenIndex} />
                             ) : null}
                           </Parent>
                         </div>
                       );
-                    }
-                  )}
-              </Screen>
-            );
-          })}
+                    })}
+                </Screen>
+              );
+            }
+          )}
         </div>
       </div>
       <RightBar />

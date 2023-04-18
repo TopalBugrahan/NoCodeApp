@@ -4,6 +4,8 @@ import ActionEventList from "./ActionEventList";
 import { changeVisibility } from "../../../redux/Screen/ScreenSlice";
 function ActionListElement({
   inputTexts,
+  titles,
+  allElement,
   action_index,
   item,
   screenIndex,
@@ -23,6 +25,10 @@ function ActionListElement({
   const selectCostum = (e) => {
     e.preventDefault();
     setSelect("costum");
+  };
+  const selectPlus = (e) => {
+    e.preventDefault();
+    setSelect("plus");
   };
   const handleClick = (action_index) => {
     const docs = document.getElementsByClassName("action_select_absolute");
@@ -52,6 +58,8 @@ function ActionListElement({
       </div>
       <div>
         <ActionEventList
+          titles={titles}
+          allElement={allElement}
           inputTexts={inputTexts}
           screenIndex={screenIndex}
           index={index}
@@ -62,6 +70,7 @@ function ActionListElement({
           selectNavigation={selectNavigation}
           selectCostum={selectCostum}
           select={select}
+          selectPlus={selectPlus}
         />
       </div>
     </div>

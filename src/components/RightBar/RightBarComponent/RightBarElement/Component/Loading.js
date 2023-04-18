@@ -1,7 +1,14 @@
 import React from "react";
 import ColorElement from "../../ColorBar/ColorElement";
 import { changeTextColor } from "../../../../../redux/Screen/ScreenSlice";
-function Loading({ index, screenIndex, contain_index, name, text_color }) {
+function Loading({
+  index,
+  screenIndex,
+  contain_index,
+  name,
+  text_color,
+  priviteName,
+}) {
   return (
     <div
       style={{
@@ -11,7 +18,7 @@ function Loading({ index, screenIndex, contain_index, name, text_color }) {
         padding: "10px",
       }}
     >
-      {name}
+      {priviteName}
 
       <ColorElement
         screenIndex={screenIndex}

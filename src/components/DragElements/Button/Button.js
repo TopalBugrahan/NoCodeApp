@@ -1,10 +1,13 @@
 import React from "react";
 import { useSelector } from "react-redux";
-function Button({ index, screenIndex, isComingContain, contain_index }) {
+function Button({ index, screenIndex, isComingContain, contain_index, item }) {
   const { myScreens } = useSelector((state) => state.screen);
   let data = myScreens[screenIndex].lastDroppedItem[index];
   if (isComingContain === true) {
     data = myScreens[screenIndex].lastDroppedItem[index].items[contain_index];
+  }
+  if (item !== undefined) {
+    data = item;
   }
   const {
     text,

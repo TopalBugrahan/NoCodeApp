@@ -32,6 +32,8 @@ function Navigation({ screenIndex, index, contain_index, action_index }) {
         params: {
           selectEmail: null,
           selectPassport: null,
+          selectTitle: null,
+          selectCostum: null,
           backgroundColor: null,
           width: null,
           height: null,
@@ -59,6 +61,8 @@ function Navigation({ screenIndex, index, contain_index, action_index }) {
         params: {
           selectEmail: null,
           selectPassport: null,
+          selectTitle: null,
+          selectCostum: null,
           backgroundColor: null,
           width: null,
           height: null,

@@ -3,6 +3,8 @@ import { ItemTypes } from "../../ItemType";
 export const screenSlice = createSlice({
   name: "screen",
   initialState: {
+    globalStyles: [],
+    containIndexArray: [],
     nameCount: 0,
     screenCount: 0,
     myScreens: [
@@ -11,11 +13,13 @@ export const screenSlice = createSlice({
         accepts: [ItemTypes.ELEMENT, ItemTypes.INNER_ELEMENT],
         lastDroppedItem: [],
         count: 0,
+        isSelect: false,
+        backgroundColor: "#FFFFFF",
+        backgroundImage: null,
       },
     ],
     elements: [
       {
-        meme: "null",
         actions: [],
         priviteName: "Button",
         name: "Button",
@@ -32,6 +36,7 @@ export const screenSlice = createSlice({
         borderWidth: 0,
         borderStyle: "solid",
         borderRedius: 0,
+        visibility: true,
         //
         disabled: null,
         fontStyle: null,
@@ -68,6 +73,7 @@ export const screenSlice = createSlice({
         borderStyle: "solid",
         borderRedius: 0,
         actions: [],
+        visibility: true,
         //
         disabled: null,
         hint: null,
@@ -99,6 +105,7 @@ export const screenSlice = createSlice({
         borderStyle: "solid",
         borderRedius: 0,
         actions: [],
+        visibility: true,
         //
         fontStyle: null,
         font_weight: null,
@@ -126,6 +133,7 @@ export const screenSlice = createSlice({
         borderStyle: "solid",
         borderRedius: 0,
         actions: [],
+        visibility: true,
         //
         disabled: null,
         font_size: null,
@@ -158,6 +166,7 @@ export const screenSlice = createSlice({
         borderRedius: 0,
         items: [],
         actions: [],
+        visibility: true,
         //
         disabled: null,
         font_weight: null,
@@ -190,6 +199,7 @@ export const screenSlice = createSlice({
         borderStyle: "solid",
         borderRedius: 0,
         actions: [],
+        visibility: true,
         //
         disabled: null,
         items: null,
@@ -226,6 +236,7 @@ export const screenSlice = createSlice({
         onColor: "#00FF00",
         offColor: "#808080",
         actions: [],
+        visibility: true,
         //
         font_weight: null,
         fontStyle: null,
@@ -244,18 +255,22 @@ export const screenSlice = createSlice({
   reducers: {
     addOnePage: (state) => {
       state.nameCount++;
-
+      console.log("addOnePage");
       state.myScreens = [
         ...state.myScreens,
         {
           name: "Screen" + state.screenCount,
           accepts: [ItemTypes.ELEMENT, ItemTypes.INNER_ELEMENT],
           lastDroppedItem: [],
+          isSelect: false,
+          backgroundColor: "#FFFFFF",
+          backgroundImage: null,
         },
       ];
       state.screenCount++;
     },
     addElementToScreen: (state, action) => {
+      console.log("addElementToScreen");
       state.nameCount++;
       state.myScreens[action.payload.index].lastDroppedItem = [
         ...state.myScreens[action.payload.index].lastDroppedItem,
@@ -289,6 +304,7 @@ export const screenSlice = createSlice({
       //elementIndex
       const { index, screenIndex } = action.payload;
       state.myScreens.forEach((element) => {
+        element.isSelect = false;
         element.lastDroppedItem.forEach((item) => {
           item.isSelect = false;
           if (item.items !== null) {
@@ -347,7 +363,6 @@ export const screenSlice = createSlice({
     },
     changeTextColor: (state, action) => {
       const { index, screenIndex, contain_index, color1 } = action.payload;
-      console.log(contain_index, color1);
       if (contain_index !== undefined) {
         state.myScreens[screenIndex].lastDroppedItem[index].items[
           contain_index
@@ -530,7 +545,9 @@ export const screenSlice = createSlice({
       }
     },
     addElementToContain: (state, action) => {
-      state.nameCount++;
+      console.log(current(state.containIndexArray));
+      console.log("addElementToContain");
+      state.nameCount = state.nameCount + 1;
       state.myScreens[action.payload.screenIndex].lastDroppedItem[
         action.payload.inner_index
       ].items = [
@@ -622,9 +639,6 @@ export const screenSlice = createSlice({
     addAction: (state, action) => {
       const { screenIndex, index, contain_index } = action.payload;
       if (contain_index === "undefined") {
-        console.log(
-          current(state.myScreens[screenIndex].lastDroppedItem[index].actions)
-        );
         state.myScreens[screenIndex].lastDroppedItem[index].actions = [
           ...state.myScreens[screenIndex].lastDroppedItem[index].actions,
           {
@@ -650,6 +664,8 @@ export const screenSlice = createSlice({
             params: {
               selectEmail: null,
               selectPassport: null,
+              selectTitle: null,
+              selectCostum: null,
               backgroundColor: null,
               width: null,
               height: null,
@@ -683,7 +699,6 @@ export const screenSlice = createSlice({
       });
     },
     selectAction: (state, action) => {
-      console.log("action");
       const { screenIndex, index, contain_index, action_index, event, params } =
         action.payload;
       let data = state.myScreens[screenIndex].lastDroppedItem[index];
@@ -696,15 +711,10 @@ export const screenSlice = createSlice({
       data.actions[action_index].route = null;
       data.actions[action_index].event = event;
       data.actions[action_index].params = params;
-      console.log(
-        current(state.myScreens[screenIndex].lastDroppedItem[index].actions)
-      );
     },
     selectRoute: (state, action) => {
-      console.log("router");
       const { screenIndex, index, contain_index, action_index, route } =
         action.payload;
-      console.log(screenIndex, index, contain_index, action_index, route);
       let data = state.myScreens[screenIndex].lastDroppedItem[index];
       if (contain_index !== "undefined") {
         data =
@@ -713,9 +723,62 @@ export const screenSlice = createSlice({
           ];
       }
       data.actions[action_index].route = route;
-      console.log(
-        current(state.myScreens[screenIndex].lastDroppedItem[index].actions)
-      );
+    },
+    deleteScreen: (state, action) => {
+      const { screenIndex } = action.payload;
+      state.myScreens.splice(screenIndex, 1);
+    },
+    changeScreenSelect: (state, action) => {
+      //screenIndex
+      //elementIndex
+      const { screenIndex } = action.payload;
+      state.myScreens.forEach((element) => {
+        element.isSelect = false;
+        element.lastDroppedItem.forEach((item) => {
+          item.isSelect = false;
+          if (item.items !== null) {
+            item.items.forEach((contain_element) => {
+              contain_element.isSelect = false;
+            });
+          }
+        });
+      });
+      state.myScreens[screenIndex].isSelect =
+        !state.myScreens[screenIndex].isSelect;
+    },
+    changeScreenColor: (state, action) => {
+      const { screenIndex, color1 } = action.payload;
+      state.myScreens[screenIndex].backgroundColor = color1;
+    },
+    changeScreenImage: (state, action) => {
+      const { screenIndex, src } = action.payload;
+      state.myScreens[screenIndex].backgroundImage = src;
+    },
+    addGlobalStyle: (state, action) => {
+      const { select, styleName } = action.payload;
+      state.globalStyles = [
+        ...state.globalStyles,
+        {
+          styleName,
+          name: select,
+          styles: {
+            font_size: null,
+            text_color: null,
+            backgroundColor: "white",
+            borderColor: "#000000",
+            borderWidth: 1,
+            borderStyle: "solid",
+            borderRedius: 0,
+            fontStyle: null,
+            font_weight: null,
+            offColor: null,
+            onColor: null,
+            resize: null,
+            textDecoration: null,
+            text_align: null,
+          },
+        },
+      ];
     },
   },
 });
@@ -765,5 +828,10 @@ export const {
   changeVisibility,
   selectAction,
   selectRoute,
+  deleteScreen,
+  changeScreenSelect,
+  changeScreenColor,
+  changeScreenImage,
+  addGlobalStyle,
 } = screenSlice.actions;
 export default screenSlice.reducer;

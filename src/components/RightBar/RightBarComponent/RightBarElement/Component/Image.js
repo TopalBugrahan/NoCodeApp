@@ -10,7 +10,15 @@ const options = [
   { value: "contain", label: "Contain" },
 ];
 
-function Image({ name, resize, index, contain_index, screenIndex, src }) {
+function Image({
+  name,
+  resize,
+  index,
+  contain_index,
+  screenIndex,
+  src,
+  priviteName,
+}) {
   const dispatch = useDispatch();
   return (
     <div
@@ -21,7 +29,7 @@ function Image({ name, resize, index, contain_index, screenIndex, src }) {
         padding: "10px",
       }}
     >
-      {name}
+      {priviteName}
 
       <div
         style={{

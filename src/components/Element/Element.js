@@ -1,7 +1,8 @@
 import React, { memo } from "react";
 import { useDrag } from "react-dnd";
-
+import { useSelector } from "react-redux";
 function Element({ item, isDropped }) {
+  const { nameCount } = useSelector((state) => state.screen);
   const {
     name,
     type,
@@ -35,6 +36,7 @@ function Element({ item, isDropped }) {
     priviteName,
     actions,
     ali,
+    visibility,
   } = item;
   const [{ opacity }, drag] = useDrag(
     () => ({
@@ -72,12 +74,14 @@ function Element({ item, isDropped }) {
         priviteName,
         actions,
         ali,
+        visibility,
+        nameCount,
       },
       collect: (monitor) => ({
         opacity: monitor.isDragging() ? 0.9 : 1,
       }),
     }),
-    [name, type]
+    [name, type, nameCount]
   );
 
   return (

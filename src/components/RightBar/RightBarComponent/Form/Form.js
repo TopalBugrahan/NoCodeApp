@@ -25,6 +25,7 @@ function Form({ index, screenIndex, item, contain_index }) {
     src,
     onColor,
     offColor,
+    priviteName,
   } = item;
   return (
     <form
@@ -34,6 +35,7 @@ function Form({ index, screenIndex, item, contain_index }) {
       }}
     >
       <RightBarElement
+        priviteName={priviteName}
         name={name}
         text={text}
         index={index}

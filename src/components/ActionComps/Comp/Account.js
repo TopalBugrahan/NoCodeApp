@@ -59,6 +59,8 @@ function Account({
         params: {
           selectEmail: signEmailSelect,
           selectPassport: signPasswordSelect,
+          selectTitle: null,
+          selectCostum: null,
           backgroundColor: null,
           width: null,
           height: null,
@@ -85,6 +87,8 @@ function Account({
         params: {
           selectEmail: logEmailSelect,
           selectPassport: logPasswordSelect,
+          selectTitle: null,
+          selectCostum: null,
           backgroundColor: null,
           width: null,
           height: null,
@@ -101,7 +105,24 @@ function Account({
   const logoutUserEvent = () => {
     const event = "logout_user";
     dispatch(
-      selectAction({ screenIndex, index, contain_index, action_index, event })
+      selectAction({
+        screenIndex,
+        index,
+        contain_index,
+        action_index,
+        event,
+        params: {
+          selectEmail: null,
+          selectPassport: null,
+          selectCostum: null,
+          selectTitle: null,
+          backgroundColor: null,
+          width: null,
+          height: null,
+          top: null,
+          left: null,
+        },
+      })
     );
     dispatch(
       changeVisibility({ screenIndex, index, contain_index, action_index })

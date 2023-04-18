@@ -7,7 +7,6 @@ function ActionBar({ screenIndex, index, contain_index }) {
   const dispatch = useDispatch();
   const deleteElemet = (e) => {
     e.preventDefault();
-    console.log("mal");
     dispatch(deleteElement({ screenIndex, index, contain_index }));
   };
   const goActionPage = (e) => {

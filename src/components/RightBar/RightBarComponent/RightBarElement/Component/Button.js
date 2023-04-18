@@ -15,6 +15,7 @@ function Button({
   name,
   font_size,
   text_color,
+  priviteName,
 }) {
   const dispatch = useDispatch();
   return (
@@ -26,7 +27,7 @@ function Button({
         padding: "10px",
       }}
     >
-      {name}
+      {priviteName}
       <input
         className="right_bar_input"
         style={{ marginBottom: "10px", height: "32px" }}

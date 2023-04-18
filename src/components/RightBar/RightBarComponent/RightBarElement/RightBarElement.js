@@ -5,7 +5,7 @@ import TextInput from "./Component/TextInput";
 import Image from "./Component/Image";
 import Loading from "./Component/Loading";
 import Switch from "./Component/Switch";
-
+import Contain from "./Component/Contain";
 function RightBarElement({
   text,
   index,
@@ -25,11 +25,13 @@ function RightBarElement({
   src,
   onColor,
   offColor,
+  priviteName,
 }) {
   switch (name) {
     case "Button":
       return (
         <Button
+          priviteName={priviteName}
           text={text}
           index={index}
           contain_index={contain_index}
@@ -42,6 +44,7 @@ function RightBarElement({
     case "Title":
       return (
         <Title
+          priviteName={priviteName}
           text={text}
           index={index}
           contain_index={contain_index}
@@ -58,6 +61,7 @@ function RightBarElement({
     case "Text Input":
       return (
         <TextInput
+          priviteName={priviteName}
           text={text}
           index={index}
           contain_index={contain_index}
@@ -73,6 +77,7 @@ function RightBarElement({
     case "Image":
       return (
         <Image
+          priviteName={priviteName}
           index={index}
           contain_index={contain_index}
           screenIndex={screenIndex}
@@ -84,6 +89,7 @@ function RightBarElement({
     case "Loading":
       return (
         <Loading
+          priviteName={priviteName}
           index={index}
           contain_index={contain_index}
           screenIndex={screenIndex}
@@ -94,6 +100,7 @@ function RightBarElement({
     case "Switch":
       return (
         <Switch
+          priviteName={priviteName}
           index={index}
           contain_index={contain_index}
           screenIndex={screenIndex}
@@ -102,6 +109,8 @@ function RightBarElement({
           offColor={offColor}
         />
       );
+    case "Contain":
+      return <Contain priviteName={priviteName} />;
     default:
       break;
   }

@@ -41,8 +41,10 @@ code {
 .header {
   height: 6vh;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .center {
@@ -407,4 +409,165 @@ code {
 
 .event_button1:hover {
   background-color: #606669;
+}
+
+.style_left_bar {
+  border: 1px solid black;
+  width: 40%;
+  height: 80vh;
+}
+
+.style_page {
+  margin: 20px;
+}
+
+.style_header {
+  padding: 10px;
+  display: flex;
+  justify-content: flex-end;
+  border: 1px solid blue;
+}
+
+.style_header_button {
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 5px;
+}
+
+.modal {}
+
+.modal>.header {
+  width: 100%;
+  border-bottom: 1px solid gray;
+  font-size: 18px;
+  text-align: center;
+  padding: 5px;
+}
+
+.modal>.content {
+  width: 100%;
+  padding: 10px 5px;
+}
+
+.modal>.actions {
+  width: 100%;
+  padding: 10px 5px;
+  margin: auto;
+  text-align: center;
+}
+
+.modal>.close {
+  cursor: pointer;
+  position: absolute;
+  display: block;
+  padding: 2px 5px;
+  line-height: 20px;
+  right: -10px;
+  top: -10px;
+  font-size: 24px;
+  background: #ffffff;
+  border-radius: 18px;
+  border: 1px solid #cfcece;
+}
+
+.popup_header {
+  font-size: 20;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.popup_content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.popup_row {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 20px;
+
+}
+
+.popup_title {
+  margin-right: 10px;
+  padding: 5px;
+}
+
+.popup_input {
+  border: 1px solid #DDDDDD;
+  border-radius: 5px;
+  padding: 5px;
+  width: 150px;
+}
+
+.popup_button {
+  border: 1px solid #DDDDDD;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: white;
+  margin-right: 10px;
+}
+
+.left_bar_item {
+  margin: 10px;
+  border: 1px solid #606669;
+  padding: 15px;
+  display: flex;
+  cursor: pointer;
+
+}
+
+.left_bar_item_name {
+  color: #606669;
+  font-size: large;
+}
+
+.left_bar_item_name2 {
+  font-size: large;
+}
+
+.style_page_bottom {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.right_bar_contain {
+  border: 1px solid black;
+  width: 30%;
+  margin-left: 30px;
+}
+
+.flex_contain {
+  display: flex;
+  flex-direction: column;
+}
+
+.button_color {
+  background-color: white;
+  border: 1px solid #606669;
+  padding: 10px;
+  border-radius: 10px;
+  margin-left: 10px;
+  width: 40%;
+}
+
+.inner_element {
+  margin: 10px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.input_right_bar {
+  background-color: white;
+  border: 1px solid #606669;
+  padding: 10px;
+  border-radius: 10px;
+  margin-left: 10px;
+  width: 35%;
 }

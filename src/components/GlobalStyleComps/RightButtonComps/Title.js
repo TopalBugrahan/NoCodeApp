@@ -1,60 +1,15 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import {
-  changeText,
-  changeTextColor,
-  changeTextAlign,
-  changeTextDecoration,
-  changeFontStyle,
-  changeFontWidth,
-  changeTextSize,
-} from "../../../../../redux/Screen/ScreenSlice";
-import ColorElement from "../../ColorBar/ColorElement";
 import { FaAlignLeft, FaAlignRight, FaAlignCenter } from "react-icons/fa";
 import { AiOutlineFontSize } from "react-icons/ai";
-function Title({
-  text,
-  index,
-  screenIndex,
-  contain_index,
-  name,
-  text_align,
-  textDecoration,
-  font_weight,
-  fontStyle,
-  font_size,
-  text_color,
-  priviteName,
-}) {
+function Title() {
   const [visibility, setVisibility] = useState("hidden");
-  const dispatch = useDispatch();
+  const [text_align, setTextAlign] = useState("left");
+  const [font_weight, setfont_weight] = useState("normal");
+  const [fontStyle, setfontStyle] = useState("normal");
+  const [textDecoration, settextDecoration] = useState(null);
+  const [font_size, setfont_size] = useState(15);
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        border: "1px solid black",
-        padding: "10px",
-      }}
-    >
-      {priviteName}
-      <input
-        className="right_bar_input"
-        type="text"
-        value={text}
-        onChange={(e) => {
-          const text = e.target.value;
-          dispatch(changeText({ screenIndex, contain_index, index, text }));
-        }}
-      />
-      <ColorElement
-        screenIndex={screenIndex}
-        index={index}
-        contain_index={contain_index}
-        title="Text Color"
-        change={changeTextColor}
-        elementColor={text_color}
-      />
+    <div className="flex_contain">
       <div
         style={{
           display: "flex",
@@ -64,6 +19,7 @@ function Title({
       >
         <p
           style={{
+            textAlign: "center",
             width: "40%",
             height: "30px",
             overflow: "hidden",
@@ -91,14 +47,6 @@ function Title({
                 let font_weight1;
                 if (font_weight === "bold") font_weight1 = null;
                 else font_weight1 = "bold";
-                dispatch(
-                  changeFontWidth({
-                    screenIndex,
-                    contain_index,
-                    index,
-                    font_weight1,
-                  })
-                );
               }}
             >
               B
@@ -111,14 +59,6 @@ function Title({
                 let fontStyle1;
                 if (fontStyle === "italic") fontStyle1 = null;
                 else fontStyle1 = "italic";
-                dispatch(
-                  changeFontStyle({
-                    screenIndex,
-                    contain_index,
-                    index,
-                    fontStyle1,
-                  })
-                );
               }}
             >
               I
@@ -133,14 +73,6 @@ function Title({
                 let textDecoration1;
                 if (textDecoration === "underline") textDecoration1 = null;
                 else textDecoration1 = "underline";
-                dispatch(
-                  changeTextDecoration({
-                    screenIndex,
-                    contain_index,
-                    index,
-                    textDecoration1,
-                  })
-                );
               }}
             >
               U
@@ -174,14 +106,7 @@ function Title({
                   let text_align1;
                   if (text_align === "right") text_align1 = "left";
                   else text_align1 = "right";
-                  dispatch(
-                    changeTextAlign({
-                      screenIndex,
-                      contain_index,
-                      index,
-                      text_align1,
-                    })
-                  );
+
                   if (visibility === "hidden") setVisibility("visible");
                   if (visibility === "visible") setVisibility("hidden");
                 }}
@@ -196,14 +121,7 @@ function Title({
                   let text_align1;
                   if (text_align === "center") text_align1 = "left";
                   else text_align1 = "center";
-                  dispatch(
-                    changeTextAlign({
-                      screenIndex,
-                      contain_index,
-                      index,
-                      text_align1,
-                    })
-                  );
+
                   if (visibility === "hidden") setVisibility("visible");
                   if (visibility === "visible") setVisibility("hidden");
                 }}
@@ -230,9 +148,6 @@ function Title({
               defaultValue={font_size}
               onChange={(e) => {
                 const size = Number(e.target.value);
-                dispatch(
-                  changeTextSize({ screenIndex, contain_index, index, size })
-                );
               }}
             />
           </div>
