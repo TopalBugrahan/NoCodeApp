@@ -1,10 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ColorPicker from "./ColorPicker";
-function Switch() {
-  const [color, setColor] = useState("#FFFFFF");
-  const [color1, setColor1] = useState("#FFFFFF");
+import {
+  changeGlobalStyleOffColor,
+  changeGlobalStyleOnColor,
+} from "../../../redux/Screen/ScreenSlice";
+function Switch({ select, styleIndex }) {
+  const [color, setColor] = useState(select.styles.onColor);
+  const [color1, setColor1] = useState(select.styles.offColor);
   const [onVisibility, setOnVisibility] = useState(false);
   const [offVisibility, setOffVisibility] = useState(false);
+  useEffect(() => {
+    setColor(select.styles.onColor);
+    setColor1(select.styles.offColor);
+  }, [select]);
   return (
     <div className="flex_contain">
       <div className="inner_element">
@@ -26,7 +34,12 @@ function Switch() {
             visibility: onVisibility ? "visible" : "hidden",
           }}
         >
-          <ColorPicker color={color} setColor={setColor} />
+          <ColorPicker
+            color={color}
+            setColor={setColor}
+            func={changeGlobalStyleOnColor}
+            styleIndex={styleIndex}
+          />
         </div>
       </div>
 
@@ -49,7 +62,12 @@ function Switch() {
             visibility: offVisibility ? "visible" : "hidden",
           }}
         >
-          <ColorPicker color={color1} setColor={setColor1} />
+          <ColorPicker
+            color={color1}
+            setColor={setColor1}
+            func={changeGlobalStyleOffColor}
+            styleIndex={styleIndex}
+          />
         </div>
       </div>
     </div>

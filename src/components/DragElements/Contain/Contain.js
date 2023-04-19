@@ -15,10 +15,12 @@ import Loading from "../Loading";
 import Switch from "../Switch";
 import ContainParent from "./ContainParent/ContainParent";
 function Contain({ index, screenIndex, isComingContain, contain_index, item }) {
-  const { nameCount, containIndexArray } = useSelector((state) => state.screen);
+  const { nameCount, containIndexArray, globalStyles } = useSelector(
+    (state) => state.screen
+  );
   const dispatch = useDispatch();
 
-  const {
+  let {
     top,
     left,
     items,
@@ -27,7 +29,15 @@ function Contain({ index, screenIndex, isComingContain, contain_index, item }) {
     borderStyle,
     borderRedius,
     backgroundColor,
+    globalStyle,
   } = item;
+  if (globalStyle !== null) {
+    backgroundColor = globalStyles[globalStyle].styles.backgroundColor;
+    borderColor = globalStyles[globalStyle].styles.borderColor;
+    borderRedius = globalStyles[globalStyle].styles.borderRedius;
+    borderStyle = globalStyles[globalStyle].styles.borderStyle;
+    borderWidth = globalStyles[globalStyle].styles.borderWidth;
+  }
   const initial_top = top;
   const initial_left = left;
   let width = item.width;
@@ -118,6 +128,7 @@ function Contain({ index, screenIndex, isComingContain, contain_index, item }) {
                 value: item.value,
                 actions: item.actions,
                 visibility: item.visibility,
+                globalStyle: null,
               },
               screenIndex: screenIndex,
               inner_index: index,

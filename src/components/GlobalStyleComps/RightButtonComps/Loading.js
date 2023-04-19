@@ -1,8 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ColorPicker from "./ColorPicker";
-function Loading() {
-  const [color, setColor] = useState("#FFFFFF");
+import { changeGlobalStyleTextColor } from "../../../redux/Screen/ScreenSlice";
+function Loading({ select, styleIndex }) {
+  const [color, setColor] = useState(select.styles.text_color);
   const [textVisibility, setTextVisibility] = useState(false);
+  useEffect(() => {
+    setColor(select.styles.text_color);
+  }, [select]);
   return (
     <div className="flex_contain">
       <div className="inner_element">
@@ -24,7 +28,12 @@ function Loading() {
             visibility: textVisibility ? "visible" : "hidden",
           }}
         >
-          <ColorPicker color={color} setColor={setColor} />
+          <ColorPicker
+            color={color}
+            setColor={setColor}
+            func={changeGlobalStyleTextColor}
+            styleIndex={styleIndex}
+          />
         </div>
       </div>
     </div>

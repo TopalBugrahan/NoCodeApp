@@ -103,6 +103,7 @@ function HomePage() {
               value: item.value,
               actions: item.actions,
               visibility: item.visibility,
+              globalStyle: null,
             },
             index: index,
             inner_index: item.inner_index,

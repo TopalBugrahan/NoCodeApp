@@ -762,23 +762,91 @@ export const screenSlice = createSlice({
           styleName,
           name: select,
           styles: {
-            font_size: null,
-            text_color: null,
-            backgroundColor: "white",
+            font_size: 15,
+            text_color: "#000000",
+            backgroundColor: "#FFFFFF",
             borderColor: "#000000",
             borderWidth: 1,
             borderStyle: "solid",
             borderRedius: 0,
-            fontStyle: null,
-            font_weight: null,
-            offColor: null,
-            onColor: null,
+            fontStyle: "normal",
+            font_weight: "normal",
+            offColor: "#808080",
+            onColor: "#00FF00",
             resize: null,
             textDecoration: null,
-            text_align: null,
+            text_align: "left",
           },
         },
       ];
+    },
+    changeGlobalStyleTextColor: (state, action) => {
+      const { styleIndex, color1 } = action.payload;
+      state.globalStyles[styleIndex].styles.text_color = color1;
+    },
+    changeGlobalStyleFontSize: (state, action) => {
+      const { styleIndex, fontsize } = action.payload;
+      console.log(fontsize, styleIndex);
+      state.globalStyles[styleIndex].styles.font_size = fontsize;
+    },
+    changeGlobalStyleFontWidth: (state, action) => {
+      const { styleIndex, font_weight1 } = action.payload;
+      state.globalStyles[styleIndex].styles.font_weight = font_weight1;
+    },
+    changeGlobalStyleFontStyle: (state, action) => {
+      const { styleIndex, fontStyle1 } = action.payload;
+      state.globalStyles[styleIndex].styles.fontStyle = fontStyle1;
+    },
+    changeGlobalStyleTextDecoration: (state, action) => {
+      const { styleIndex, textDecoration1 } = action.payload;
+      state.globalStyles[styleIndex].styles.textDecoration = textDecoration1;
+    },
+    changeGlobalStyleTextAlign: (state, action) => {
+      const { styleIndex, text_align1 } = action.payload;
+      state.globalStyles[styleIndex].styles.text_align = text_align1;
+    },
+    changeGlobalStyleResize: (state, action) => {
+      const { styleIndex, resize } = action.payload;
+      state.globalStyles[styleIndex].styles.resize = resize;
+    },
+    changeGlobalStyleOnColor: (state, action) => {
+      const { styleIndex, color1 } = action.payload;
+      state.globalStyles[styleIndex].styles.onColor = color1;
+    },
+    changeGlobalStyleOffColor: (state, action) => {
+      const { styleIndex, color1 } = action.payload;
+      state.globalStyles[styleIndex].styles.offColor = color1;
+    },
+    changeGlobalStyleBackgroundColor: (state, action) => {
+      const { styleIndex, color1 } = action.payload;
+      state.globalStyles[styleIndex].styles.backgroundColor = color1;
+    },
+    changeGlobalStyleBorderColor: (state, action) => {
+      const { styleIndex, color1 } = action.payload;
+      state.globalStyles[styleIndex].styles.borderColor = color1;
+    },
+    changeGlobalStyleBorderWidth: (state, action) => {
+      const { styleIndex, width } = action.payload;
+      state.globalStyles[styleIndex].styles.borderWidth = width;
+    },
+    changeGlobalStyleBorderRadius: (state, action) => {
+      const { styleIndex, radius } = action.payload;
+      state.globalStyles[styleIndex].styles.borderRedius = radius;
+    },
+    deleteGlobalStyle: (state, action) => {
+      const { index } = action.payload;
+      state.globalStyles.splice(index, 1);
+    },
+    changeGlobalStyle: (state, action) => {
+      const { screenIndex, index, contain_index, select } = action.payload;
+      if (contain_index !== undefined) {
+        state.myScreens[screenIndex].lastDroppedItem[index].items[
+          contain_index
+        ].globalStyle = select;
+      } else {
+        state.myScreens[screenIndex].lastDroppedItem[index].globalStyle =
+          select;
+      }
     },
   },
 });
@@ -833,5 +901,20 @@ export const {
   changeScreenColor,
   changeScreenImage,
   addGlobalStyle,
+  changeGlobalStyleTextColor,
+  changeGlobalStyleFontSize,
+  changeGlobalStyleFontWidth,
+  changeGlobalStyleFontStyle,
+  changeGlobalStyleTextDecoration,
+  changeGlobalStyleTextAlign,
+  changeGlobalStyleResize,
+  changeGlobalStyleOnColor,
+  changeGlobalStyleOffColor,
+  changeGlobalStyleBackgroundColor,
+  changeGlobalStyleBorderColor,
+  changeGlobalStyleBorderWidth,
+  changeGlobalStyleBorderRadius,
+  deleteGlobalStyle,
+  changeGlobalStyle,
 } = screenSlice.actions;
 export default screenSlice.reducer;

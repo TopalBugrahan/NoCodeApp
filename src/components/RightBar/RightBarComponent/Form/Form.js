@@ -3,6 +3,7 @@ import RightBarElement from "../RightBarElement/RightBarElement";
 import Layout from "../Layout/Layout";
 import Style from "../Style/Style";
 import ActionBar from "../ActionBar/ActionBar";
+import GlobalStyle from "../GlobalStyle/GlobalStyle";
 function Form({ index, screenIndex, item, contain_index }) {
   const {
     name,
@@ -71,6 +72,12 @@ function Form({ index, screenIndex, item, contain_index }) {
         borderWidth={borderWidth}
         backgroundColor={backgroundColor}
         borderRedius={borderRedius}
+      />
+      <GlobalStyle
+        name={name}
+        screenIndex={screenIndex}
+        index={index}
+        contain_index={contain_index}
       />
       <ActionBar
         screenIndex={screenIndex}

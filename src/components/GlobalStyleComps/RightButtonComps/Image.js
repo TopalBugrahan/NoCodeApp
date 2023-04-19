@@ -1,20 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Select from "react-select";
+import { useDispatch } from "react-redux";
+import { changeGlobalStyleResize } from "../../../redux/Screen/ScreenSlice";
 const options = [
   { value: "cover", label: "Cover" },
   { value: "contain", label: "Contain" },
 ];
-function Image() {
+function Image({ select, styleIndex }) {
+  console.log(select, styleIndex);
+  const [item, setItem] = useState();
+  useEffect(() => {
+    setItem(select.styles.resize);
+  }, [select]);
+
+  const dispatch = useDispatch();
   return (
     <div className="flex_contain">
       <div className="inner_element">
-        <span style={{ width: "35%" }}>Text Size</span>
+        <span style={{ width: "35%" }}>Resize</span>
         <div style={{ width: "40%" }}>
           <Select
             options={options}
-            defaultValue={options[0]}
+            defaultValue={item}
             onChange={(e) => {
-              //setSelect(e.value);
+              const resize = e.value;
+              setItem(e.value);
+              dispatch(changeGlobalStyleResize({ styleIndex, resize }));
             }}
           />
         </div>

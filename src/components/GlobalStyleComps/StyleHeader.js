@@ -17,7 +17,13 @@ function StyleHeader() {
       <Popup trigger={buttonPopUp} modal nested>
         {(close) => (
           <div className="modal">
-            <button className="close" onClick={close}>
+            <button
+              className="close"
+              onClick={() => {
+                setSelect("Button");
+                close();
+              }}
+            >
               &times;
             </button>
             <div className="popup_header">Create A New Style</div>
@@ -43,7 +49,9 @@ function StyleHeader() {
               <button
                 className="popup_button"
                 onClick={() => {
+                  setSelect("Button");
                   dispatch(addGlobalStyle({ select, styleName }));
+                  close();
                 }}
               >
                 Add Style
@@ -51,6 +59,7 @@ function StyleHeader() {
               <button
                 className="popup_button"
                 onClick={() => {
+                  setSelect("Button");
                   close();
                 }}
               >

@@ -1,13 +1,36 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { FaAlignLeft, FaAlignRight, FaAlignCenter } from "react-icons/fa";
 import { AiOutlineFontSize } from "react-icons/ai";
-function Title() {
+import {
+  changeGlobalStyleFontWidth,
+  changeGlobalStyleFontStyle,
+  changeGlobalStyleTextDecoration,
+  changeGlobalStyleTextAlign,
+  changeGlobalStyleFontSize,
+} from "../../../redux/Screen/ScreenSlice";
+import { useSelector } from "react-redux";
+function Title({ select, styleIndex }) {
+  const { globalStyles } = useSelector((state) => state.screen);
+  const select1 = globalStyles[styleIndex];
+  const { font_size, fontStyle, font_weight, textDecoration, text_align } =
+    select1.styles;
+  const dispatch = useDispatch();
   const [visibility, setVisibility] = useState("hidden");
-  const [text_align, setTextAlign] = useState("left");
-  const [font_weight, setfont_weight] = useState("normal");
-  const [fontStyle, setfontStyle] = useState("normal");
-  const [textDecoration, settextDecoration] = useState(null);
-  const [font_size, setfont_size] = useState(15);
+  /* const [text_align, setTextAlign] = useState(select.styles.text_align);
+  const [font_weight, setfont_weight] = useState(select.styles.font_weight);
+  const [fontStyle, setfontStyle] = useState(select.styles.fontStyle);
+  const [textDecoration, settextDecoration] = useState(
+    select.styles.textDecoration
+  );
+  const [font_size, setfont_size] = useState(select.styles.font_size);
+  useEffect(() => {
+    setTextAlign(select.styles.text_align);
+    setfont_size(select.styles.font_size);
+    setfont_weight(select.styles.font_weight);
+    setfontStyle(select.styles.fontStyle);
+    settextDecoration(select.styles.textDecoration);
+  }, [select]);*/
   return (
     <div className="flex_contain">
       <div
@@ -47,6 +70,9 @@ function Title() {
                 let font_weight1;
                 if (font_weight === "bold") font_weight1 = null;
                 else font_weight1 = "bold";
+                dispatch(
+                  changeGlobalStyleFontWidth({ styleIndex, font_weight1 })
+                );
               }}
             >
               B
@@ -59,6 +85,9 @@ function Title() {
                 let fontStyle1;
                 if (fontStyle === "italic") fontStyle1 = null;
                 else fontStyle1 = "italic";
+                dispatch(
+                  changeGlobalStyleFontStyle({ styleIndex, fontStyle1 })
+                );
               }}
             >
               I
@@ -73,6 +102,12 @@ function Title() {
                 let textDecoration1;
                 if (textDecoration === "underline") textDecoration1 = null;
                 else textDecoration1 = "underline";
+                dispatch(
+                  changeGlobalStyleTextDecoration({
+                    styleIndex,
+                    textDecoration1,
+                  })
+                );
               }}
             >
               U
@@ -106,7 +141,9 @@ function Title() {
                   let text_align1;
                   if (text_align === "right") text_align1 = "left";
                   else text_align1 = "right";
-
+                  dispatch(
+                    changeGlobalStyleTextAlign({ styleIndex, text_align1 })
+                  );
                   if (visibility === "hidden") setVisibility("visible");
                   if (visibility === "visible") setVisibility("hidden");
                 }}
@@ -121,7 +158,9 @@ function Title() {
                   let text_align1;
                   if (text_align === "center") text_align1 = "left";
                   else text_align1 = "center";
-
+                  dispatch(
+                    changeGlobalStyleTextAlign({ styleIndex, text_align1 })
+                  );
                   if (visibility === "hidden") setVisibility("visible");
                   if (visibility === "visible") setVisibility("hidden");
                 }}
@@ -145,9 +184,11 @@ function Title() {
               className="right_bar_input"
               style={{ width: "75%" }}
               type="number"
-              defaultValue={font_size}
+              value={font_size}
               onChange={(e) => {
-                const size = Number(e.target.value);
+                const fontsize = Number(e.target.value);
+                //setfont_size(fontsize);
+                dispatch(changeGlobalStyleFontSize({ styleIndex, fontsize }));
               }}
             />
           </div>

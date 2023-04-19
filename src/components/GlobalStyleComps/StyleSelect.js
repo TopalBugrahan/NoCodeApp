@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Select from "react-select";
 
 const options = [
@@ -14,8 +14,9 @@ const options = [
 const StyleSelect = ({ setSelect }) => (
   <Select
     options={options}
-    defaultValue={options[0]}
+    defaultValue={{ value: "Button", label: "Button" }}
     onChange={(e) => {
+      console.log(e.value);
       setSelect(e.value);
     }}
   />
