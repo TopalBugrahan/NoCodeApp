@@ -270,7 +270,6 @@ code {
 
 .action_list_element {
   cursor: pointer;
-  margin: 10px;
   height: 200px;
   width: 200px;
   background-color: #909090;
@@ -279,11 +278,15 @@ code {
   align-items: center;
 }
 
+.action_maker_parent {
+  margin: 10px;
+  width: 200px;
+}
+
 .action_maker {
   display: flex;
   align-items: center;
   flex-direction: column;
-  margin: 10px;
   height: 200px;
   width: 200px;
   min-width: 200px;

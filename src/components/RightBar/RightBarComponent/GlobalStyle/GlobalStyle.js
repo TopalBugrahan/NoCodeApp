@@ -6,13 +6,23 @@ import { useState } from "react";
 import { changeGlobalStyle } from "../../../../redux/Screen/ScreenSlice";
 function GlobalStyle({ name, screenIndex, index, contain_index }) {
   const dispatch = useDispatch();
-  const { globalStyles } = useSelector((state) => state.screen);
+  const { globalStyles, myScreens } = useSelector((state) => state.screen);
   const [options, setOptions] = useState([]);
+
+  let defaultValue;
   useEffect(() => {
     const options1 = [{ value: null, label: "No Global Style" }];
+    /* if (contain_index !== undefined) {
+      defaultValue =
+        myScreens[screenIndex].lastDroppedItem[index].items[contain_index]
+          .globalStyle;
+    } else {
+      defaultValue = myScreens[screenIndex].lastDroppedItem[index].globalStyle;
+    }*/
     globalStyles.map((item, index) => {
       if (item.name === name) {
-        options1.push({ value: index, label: item.styleName });
+        console.log(globalStyles[index]);
+        options1.push({ value: globalStyles[index], label: item.styleName });
       }
     });
     setOptions(options1);
@@ -21,10 +31,10 @@ function GlobalStyle({ name, screenIndex, index, contain_index }) {
     <div>
       <Select
         options={options}
-        defaultValue={{ value: "Button", label: "Button" }}
+        placeholder={"Lütfen seçim yapınız"}
         onChange={(e) => {
-          console.log(e.value);
           const select = e.value;
+          console.log("select", select);
           dispatch(
             changeGlobalStyle({ screenIndex, index, contain_index, select })
           );

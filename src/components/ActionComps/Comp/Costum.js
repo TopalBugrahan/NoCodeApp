@@ -109,6 +109,9 @@ function Costum({
           height: null,
           top: null,
           left: null,
+          uri: null,
+          condition: null,
+          conditionIndex: null,
         },
       })
     );
@@ -137,6 +140,9 @@ function Costum({
           height: null,
           top: null,
           left: null,
+          uri: null,
+          condition: null,
+          conditionIndex: null,
         },
       })
     );
@@ -165,6 +171,9 @@ function Costum({
           height: null,
           top: null,
           left: null,
+          uri: null,
+          condition: null,
+          conditionIndex: null,
         },
       })
     );
@@ -192,6 +201,9 @@ function Costum({
           height,
           top: null,
           left: null,
+          uri: null,
+          condition: null,
+          conditionIndex: null,
         },
       })
     );
@@ -219,6 +231,9 @@ function Costum({
           height: null,
           top,
           left: null,
+          uri: null,
+          condition: null,
+          conditionIndex: null,
         },
       })
     );
@@ -246,6 +261,9 @@ function Costum({
           height: null,
           top: null,
           left,
+          uri: null,
+          condition: null,
+          conditionIndex: null,
         },
       })
     );

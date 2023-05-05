@@ -39,6 +39,9 @@ function Navigation({ screenIndex, index, contain_index, action_index }) {
           height: null,
           top: null,
           left: null,
+          uri: null,
+          condition: null,
+          conditionIndex: null,
         },
       })
     );
@@ -68,6 +71,9 @@ function Navigation({ screenIndex, index, contain_index, action_index }) {
           height: null,
           top: null,
           left: null,
+          uri: null,
+          condition: null,
+          conditionIndex: null,
         },
       })
     );

@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import ActionEventList from "./ActionEventList";
-import { changeVisibility } from "../../../redux/Screen/ScreenSlice";
+import {
+  changeVisibility,
+  deleteAction,
+} from "../../../redux/Screen/ScreenSlice";
 function ActionListElement({
+  allElementForSelect,
   inputTexts,
   titles,
   allElement,
@@ -30,6 +34,14 @@ function ActionListElement({
     e.preventDefault();
     setSelect("plus");
   };
+  const selectRestful = (e) => {
+    e.preventDefault();
+    setSelect("restful");
+  };
+  const selectCondition = (e) => {
+    e.preventDefault();
+    setSelect("condition");
+  };
   const handleClick = (action_index) => {
     const docs = document.getElementsByClassName("action_select_absolute");
     for (var i = 0, len = docs.length; i < len; i++) {
@@ -39,21 +51,43 @@ function ActionListElement({
       changeVisibility({ screenIndex, index, contain_index, action_index })
     );
   };
+
+  const deleteActionEvent = () => {
+    dispatch(deleteAction({ action_index, screenIndex, index, contain_index }));
+  };
+
   return (
     <div style={{ position: "relative" }}>
       <div
-        onClick={() => {
-          handleClick(action_index);
-        }}
-        className="action_list_element"
+        className="action_maker_parent"
+        style={{ backgroundColor: "#909090" }}
       >
-        <div className="action_list_element_body">
-          <p>Click Action</p>
-          {item.event !== null ? (
-            <p>{item.event}</p>
-          ) : (
-            <p>You not selected event</p>
-          )}
+        <span
+          onClick={deleteActionEvent}
+          style={{
+            fontWeight: "bold",
+            textAlign: "right",
+            display: "block",
+            cursor: "pointer",
+          }}
+        >
+          X
+        </span>
+        <div
+          onClick={() => {
+            handleClick(action_index);
+          }}
+          className="action_list_element"
+        >
+          <div className="action_list_element_body">
+            <span>{action_index}</span>
+            <p>Click Action</p>
+            {item.event !== null ? (
+              <p>{item.event}</p>
+            ) : (
+              <p>You not selected event</p>
+            )}
+          </div>
         </div>
       </div>
       <div>
@@ -71,6 +105,9 @@ function ActionListElement({
           selectCostum={selectCostum}
           select={select}
           selectPlus={selectPlus}
+          selectRestful={selectRestful}
+          selectCondition={selectCondition}
+          allElementForSelect={allElementForSelect}
         />
       </div>
     </div>

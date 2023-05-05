@@ -22,8 +22,9 @@ function Account({
   const [isSingVisible, setSingVisible] = useState(false);
   function handleMouseEnter() {
     const defaultInput = inputTexts.length > 0 ? inputTexts[0] : null;
-    setSignEmailSelect(defaultInput);
-    setSignPasswordSelect(defaultInput);
+    const temp = JSON.stringify(defaultInput);
+    setSignEmailSelect(temp);
+    setSignPasswordSelect(temp);
     setLogVisible(false);
     setLogoutVisible(false);
     setSingVisible(!isSingVisible);
@@ -31,8 +32,9 @@ function Account({
 
   function handleMouseEnter1() {
     const defaultInput = inputTexts.length > 0 ? inputTexts[0] : null;
-    setLogEmailSelect(defaultInput);
-    setLogPasswordSelect(defaultInput);
+    const temp = JSON.stringify(defaultInput);
+    setLogEmailSelect(temp);
+    setLogPasswordSelect(temp);
     setLogVisible(!isLogVisible);
     setLogoutVisible(false);
     setSingVisible(false);
@@ -66,6 +68,9 @@ function Account({
           height: null,
           top: null,
           left: null,
+          uri: null,
+          condition: null,
+          conditionIndex: null,
         },
       })
     );
@@ -94,6 +99,9 @@ function Account({
           height: null,
           top: null,
           left: null,
+          uri: null,
+          condition: null,
+          conditionIndex: null,
         },
       })
     );
@@ -121,6 +129,9 @@ function Account({
           height: null,
           top: null,
           left: null,
+          uri: null,
+          condition: null,
+          conditionIndex: null,
         },
       })
     );
@@ -182,8 +193,8 @@ function Account({
                     inputTexts.map((item, index) => {
                       const key = "SignEmail" + index;
                       return (
-                        <option key={key} value={item}>
-                          {item}
+                        <option key={key} value={JSON.stringify(item)}>
+                          {item.name}
                         </option>
                       );
                     })
@@ -210,8 +221,8 @@ function Account({
                     inputTexts.map((item, index) => {
                       const key = "SignPass" + index;
                       return (
-                        <option key={key} value={item}>
-                          {item}
+                        <option key={key} value={JSON.stringify(item)}>
+                          {item.name}
                         </option>
                       );
                     })
@@ -288,8 +299,8 @@ function Account({
                     inputTexts.map((item, index) => {
                       const key = "LogEmail" + index;
                       return (
-                        <option key={key} value={item}>
-                          {item}
+                        <option key={key} value={JSON.stringify(item)}>
+                          {item.name}
                         </option>
                       );
                     })
@@ -316,8 +327,8 @@ function Account({
                     inputTexts.map((item, index) => {
                       const key = "LogPass" + index;
                       return (
-                        <option key={key} value={item}>
-                          {item}
+                        <option key={key} value={JSON.stringify(item)}>
+                          {item.name}
                         </option>
                       );
                     })

@@ -646,7 +646,19 @@ export const screenSlice = createSlice({
             visibility: "hidden",
             event: null,
             route: null,
-            params: null,
+            params: {
+              selectEmail: null,
+              selectPassport: null,
+              selectTitle: null,
+              backgroundColor: null,
+              width: null,
+              height: null,
+              top: null,
+              left: null,
+              uri: null,
+              condition: null,
+              conditionIndex: null,
+            },
           },
         ];
       } else {
@@ -665,12 +677,14 @@ export const screenSlice = createSlice({
               selectEmail: null,
               selectPassport: null,
               selectTitle: null,
-              selectCostum: null,
               backgroundColor: null,
               width: null,
               height: null,
               top: null,
               left: null,
+              uri: null,
+              condition: null,
+              conditionIndex: null,
             },
           },
         ];
@@ -848,6 +862,39 @@ export const screenSlice = createSlice({
           select;
       }
     },
+    deleteAction: (state, action) => {
+      const { action_index, screenIndex, index, contain_index } =
+        action.payload;
+      console.log(action_index, screenIndex, index, contain_index);
+      if (contain_index !== "undefined") {
+        state.myScreens[screenIndex].lastDroppedItem[index].items[
+          contain_index
+        ].actions.splice(action_index, 1);
+      } else {
+        state.myScreens[screenIndex].lastDroppedItem[index].actions.splice(
+          action_index,
+          1
+        );
+      }
+    },
+    changeConditionIndex: (state, action) => {
+      const {
+        screenIndex,
+        index,
+        contain_index,
+        action_index,
+        conditionIndex,
+      } = action.payload;
+      if (contain_index === "undefined") {
+        state.myScreens[screenIndex].lastDroppedItem[index].actions[
+          conditionIndex
+        ].params.conditionIndex = action_index;
+      } else {
+        state.myScreens[screenIndex].lastDroppedItem[index].items[
+          contain_index
+        ].actions[conditionIndex].params.conditionIndex = action_index;
+      }
+    },
   },
 });
 
@@ -916,5 +963,7 @@ export const {
   changeGlobalStyleBorderRadius,
   deleteGlobalStyle,
   changeGlobalStyle,
+  deleteAction,
+  changeConditionIndex,
 } = screenSlice.actions;
 export default screenSlice.reducer;

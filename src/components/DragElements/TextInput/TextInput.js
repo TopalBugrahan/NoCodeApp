@@ -2,11 +2,12 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { changeText } from "../../../redux/Screen/ScreenSlice";
 function TextInput({ index, screenIndex, isComingContain, contain_index }) {
-  const { myScreens, globalStyles } = useSelector((state) => state.screen);
+  const { myScreens } = useSelector((state) => state.screen);
   let data = myScreens[screenIndex].lastDroppedItem[index];
   if (isComingContain === true) {
     data = myScreens[screenIndex].lastDroppedItem[index].items[contain_index];
   }
+  console.log("input text", myScreens);
   const dispatch = useDispatch();
   let {
     text,
@@ -31,13 +32,14 @@ function TextInput({ index, screenIndex, isComingContain, contain_index }) {
   }
 
   if (globalStyle !== null) {
-    text_color = globalStyles[globalStyle].styles.text_color;
-    font_size = globalStyles[globalStyle].styles.font_size;
-    backgroundColor = globalStyles[globalStyle].styles.backgroundColor;
-    borderColor = globalStyles[globalStyle].styles.borderColor;
-    borderRedius = globalStyles[globalStyle].styles.borderRedius;
-    borderStyle = globalStyles[globalStyle].styles.borderStyle;
-    borderWidth = globalStyles[globalStyle].styles.borderWidth;
+    console.log(globalStyle.styles.backgroundColor);
+    text_color = globalStyle.styles.text_color;
+    font_size = globalStyle.styles.font_size;
+    backgroundColor = globalStyle.styles.backgroundColor;
+    borderColor = globalStyle.styles.borderColor;
+    borderRedius = globalStyle.styles.borderRedius;
+    borderStyle = globalStyle.styles.borderStyle;
+    borderWidth = globalStyle.styles.borderWidth;
   }
   return (
     <div>

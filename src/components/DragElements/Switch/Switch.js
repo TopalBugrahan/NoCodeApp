@@ -2,7 +2,7 @@ import React from "react";
 import Switch from "react-switch";
 import { useSelector } from "react-redux";
 function SwitchComp({ index, screenIndex, isComingContain, contain_index }) {
-  const { myScreens, globalStyles } = useSelector((state) => state.screen);
+  const { myScreens } = useSelector((state) => state.screen);
   let data = myScreens[screenIndex].lastDroppedItem[index];
   if (isComingContain === true) {
     data = myScreens[screenIndex].lastDroppedItem[index].items[contain_index];
@@ -27,13 +27,13 @@ function SwitchComp({ index, screenIndex, isComingContain, contain_index }) {
     height = 0;
   }
   if (globalStyle !== null) {
-    onColor = globalStyles[globalStyle].styles.onColor;
-    offColor = globalStyles[globalStyle].styles.offColor;
-    backgroundColor = globalStyles[globalStyle].styles.backgroundColor;
-    borderColor = globalStyles[globalStyle].styles.borderColor;
-    borderRedius = globalStyles[globalStyle].styles.borderRedius;
-    borderStyle = globalStyles[globalStyle].styles.borderStyle;
-    borderWidth = globalStyles[globalStyle].styles.borderWidth;
+    onColor = globalStyle.styles.onColor;
+    offColor = globalStyle.styles.offColor;
+    backgroundColor = globalStyle.styles.backgroundColor;
+    borderColor = globalStyle.styles.borderColor;
+    borderRedius = globalStyle.styles.borderRedius;
+    borderStyle = globalStyle.styles.borderStyle;
+    borderWidth = globalStyle.styles.borderWidth;
   }
   return (
     <div

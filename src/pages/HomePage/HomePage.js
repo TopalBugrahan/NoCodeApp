@@ -26,7 +26,7 @@ function HomePage() {
   const { myScreens, elements, screenCount } = useSelector(
     (state) => state.screen
   );
-  //console.log("MyScreens içi", myScreens);
+  console.log("MyScreens içi", myScreens);
   //Benim sol tarafta bulunan elementlerim
 
   const [element] = useState(elements);

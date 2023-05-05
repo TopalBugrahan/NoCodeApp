@@ -15,9 +15,7 @@ import Loading from "../Loading";
 import Switch from "../Switch";
 import ContainParent from "./ContainParent/ContainParent";
 function Contain({ index, screenIndex, isComingContain, contain_index, item }) {
-  const { nameCount, containIndexArray, globalStyles } = useSelector(
-    (state) => state.screen
-  );
+  const { nameCount, containIndexArray } = useSelector((state) => state.screen);
   const dispatch = useDispatch();
 
   let {
@@ -32,11 +30,11 @@ function Contain({ index, screenIndex, isComingContain, contain_index, item }) {
     globalStyle,
   } = item;
   if (globalStyle !== null) {
-    backgroundColor = globalStyles[globalStyle].styles.backgroundColor;
-    borderColor = globalStyles[globalStyle].styles.borderColor;
-    borderRedius = globalStyles[globalStyle].styles.borderRedius;
-    borderStyle = globalStyles[globalStyle].styles.borderStyle;
-    borderWidth = globalStyles[globalStyle].styles.borderWidth;
+    backgroundColor = globalStyle.styles.backgroundColor;
+    borderColor = globalStyle.styles.borderColor;
+    borderRedius = globalStyle.styles.borderRedius;
+    borderStyle = globalStyle.styles.borderStyle;
+    borderWidth = globalStyle.styles.borderWidth;
   }
   const initial_top = top;
   const initial_left = left;

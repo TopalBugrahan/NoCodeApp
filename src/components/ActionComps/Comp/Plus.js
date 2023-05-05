@@ -8,6 +8,7 @@ import { IoClose } from "react-icons/io5";
 function Plus({ screenIndex, index, contain_index, action_index, titles }) {
   const [isPlusVisible, setPlusVisible] = useState(false);
   const [selectTitle, setSelectTitle] = useState(null);
+
   const dispatch = useDispatch();
   function changePlusVisible() {
     const defaultTitle = titles.length > 0 ? titles[0] : null;
@@ -16,7 +17,6 @@ function Plus({ screenIndex, index, contain_index, action_index, titles }) {
   }
   const plusEvent = () => {
     const event = "dynamic_value";
-
     dispatch(
       selectAction({
         screenIndex,
@@ -33,6 +33,9 @@ function Plus({ screenIndex, index, contain_index, action_index, titles }) {
           height: null,
           top: null,
           left: null,
+          uri: null,
+          condition: null,
+          conditionIndex: null,
         },
       })
     );
@@ -94,8 +97,8 @@ function Plus({ screenIndex, index, contain_index, action_index, titles }) {
                     titles.map((item, index) => {
                       const key = "SignEmail" + index;
                       return (
-                        <option key={key} value={item}>
-                          {item}
+                        <option key={key} value={JSON.stringify(item)}>
+                          {item.name}
                         </option>
                       );
                     })

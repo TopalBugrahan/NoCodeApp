@@ -3,7 +3,7 @@ import ReactLoading from "react-loading";
 import { useSelector } from "react-redux";
 
 function Loading({ index, screenIndex, isComingContain, contain_index }) {
-  const { myScreens, globalStyles } = useSelector((state) => state.screen);
+  const { myScreens } = useSelector((state) => state.screen);
   let data = myScreens[screenIndex].lastDroppedItem[index];
   if (isComingContain === true) {
     data = myScreens[screenIndex].lastDroppedItem[index].items[contain_index];
@@ -32,12 +32,12 @@ function Loading({ index, screenIndex, isComingContain, contain_index }) {
     height = width;
   }
   if (globalStyle !== null) {
-    text_color = globalStyles[globalStyle].styles.text_color;
-    backgroundColor = globalStyles[globalStyle].styles.backgroundColor;
-    borderColor = globalStyles[globalStyle].styles.borderColor;
-    borderRedius = globalStyles[globalStyle].styles.borderRedius;
-    borderStyle = globalStyles[globalStyle].styles.borderStyle;
-    borderWidth = globalStyles[globalStyle].styles.borderWidth;
+    text_color = globalStyle.styles.text_color;
+    backgroundColor = globalStyle.styles.backgroundColor;
+    borderColor = globalStyle.styles.borderColor;
+    borderRedius = globalStyle.styles.borderRedius;
+    borderStyle = globalStyle.styles.borderStyle;
+    borderWidth = globalStyle.styles.borderWidth;
   }
   return (
     <div
