@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 function Image({ index, screenIndex, isComingContain, contain_index }) {
-  const { myScreens } = useSelector((state) => state.screen);
+  const { globalStyles, myScreens } = useSelector((state) => state.screen);
   let data = myScreens[screenIndex].lastDroppedItem[index];
   if (isComingContain === true) {
     data = myScreens[screenIndex].lastDroppedItem[index].items[contain_index];
@@ -20,12 +20,16 @@ function Image({ index, screenIndex, isComingContain, contain_index }) {
   } = data;
 
   if (globalStyle !== null) {
-    resize = globalStyle.styles.resize;
-    backgroundColor = globalStyle.styles.backgroundColor;
-    borderColor = globalStyle.styles.borderColor;
-    borderRedius = globalStyle.styles.borderRedius;
-    borderStyle = globalStyle.styles.borderStyle;
-    borderWidth = globalStyle.styles.borderWidth;
+    let style = globalStyles.find(el => el.id == globalStyle.id)?.styles || globalStyle.styles;
+    if(style != null)
+    {
+      resize = style.resize;
+      backgroundColor = style.backgroundColor;
+      borderColor = style.borderColor;
+      borderRedius = style.borderRedius;
+      borderStyle = style.borderStyle;
+      borderWidth = style.borderWidth;
+    }
   }
   return (
     <div>

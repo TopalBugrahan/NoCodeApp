@@ -773,6 +773,7 @@ export const screenSlice = createSlice({
       state.globalStyles = [
         ...state.globalStyles,
         {
+          id: `style_${Math.random().toString(16).slice(2)}`, //Generate random id
           styleName,
           name: select,
           styles: {
