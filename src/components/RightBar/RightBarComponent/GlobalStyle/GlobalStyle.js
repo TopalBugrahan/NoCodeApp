@@ -26,7 +26,7 @@ function GlobalStyle({ name, screenIndex, index, contain_index }) {
     globalStyles.map((item, index) => {
       if (item.name === name) {
         options1.push({ value: globalStyles[index], label: item.styleName });
-        if(selectedStyle.id == globalStyles[index].id)
+        if(selectedStyle && selectedStyle.id == globalStyles[index].id)
         {
           setSelectedOption(options1[options1.length-1]);
         }
