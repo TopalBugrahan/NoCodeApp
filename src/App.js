@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import { DndProvider } from "react-dnd";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import HomePage from "./pages/HomePage";
+import DesignPage from "./pages/DesignPage";
 import ActionPage from "./pages/ActionPage";
 import SingUp from "./pages/SingUp";
 import LoginPage from "./pages/LoginPage";
@@ -17,7 +17,7 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<MainLayout />}>
-              <Route index={true} element={<HomePage />} />
+              <Route index={true} element={<DesignPage />} />
               <Route path="action_page" element={<ActionPage />} />
               <Route path="global_syle_page" element={<GlobalStylePage />} />
             </Route>       

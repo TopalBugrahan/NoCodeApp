@@ -21,7 +21,7 @@ import Contain from "../../components/DragElements/Contain";
 import Loading from "../../components/DragElements/Loading";
 import Switch from "../../components/DragElements/Switch";
 
-function HomePage() {
+function DesignPage() {
   //Benim Sayfam reduxta bulunuyor
   const { myScreens, elements, screenCount } = useSelector(
     (state) => state.screen
@@ -216,4 +216,4 @@ function HomePage() {
   );
 }
 
-export default memo(HomePage);
+export default memo(DesignPage);
