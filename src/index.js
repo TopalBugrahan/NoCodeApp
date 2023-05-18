@@ -7,6 +7,7 @@ import './assets/css/utilities.css';
 import App from './App';
 import { PersistGate } from 'redux-persist/integration/react';
 import { persistStore } from 'redux-persist';
+import { AuthProvider } from './context/AuthContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 let asdasd = persistStore(store);
@@ -14,7 +15,9 @@ root.render(
     <Provider store={store}>
         <React.StrictMode>
             <PersistGate persistor={asdasd}>
-                <App />
+                <AuthProvider>
+                    <App />
+                </AuthProvider>
             </PersistGate>
         </React.StrictMode>
     </Provider>
