@@ -28,6 +28,28 @@ function Header({ onClick }) {
       });
   }
 
+  const downloadProject = () => {
+    axios
+      .get(`/api/v1/projects/${projectId}/download`,{
+        responseType: 'blob'
+      })
+      .then((response) => {
+        let filename = response.headers['content-disposition']
+        .split(';')
+        .find(n => n.includes('filename='))
+        .replace('filename=', '')
+        .replaceAll('"', '')
+        .trim();
+        
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = filename;
+        link.click();
+        window.URL.revokeObjectURL(url);
+      });
+  }
+
   return (
     <div className="header">
       <div>
@@ -36,6 +58,10 @@ function Header({ onClick }) {
         </button>
       </div>
       <div>
+
+        <button className="page_button me-2" onClick={downloadProject}>
+            İndir
+        </button>
         <button className="page_button me-2" onClick={saveProject}>
             Kaydet
         </button>
