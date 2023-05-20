@@ -95,12 +95,14 @@ export default function HomePage() {
                         <div className="px-5 mt-3">
                             <table border="1" cellPadding={3} cellSpacing={0}>
                                 <thead>
-                                    <th>Proje Adı</th>
-                                    <th></th>
+                                    <tr>
+                                        <th>Proje Adı</th>
+                                        <th></th>
+                                    </tr>
                                 </thead>
                                 <tbody>
                                     {projects.map((r, i) => (
-                                        <tr>
+                                        <tr key={i}>
                                             <td>
                                                 <Link to={generatePath("/design_page/:id", {id:r.id})}>{r.name}</Link>
                                             </td>
