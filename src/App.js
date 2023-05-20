@@ -9,6 +9,7 @@ import LoginPage from "./pages/LoginPage";
 import GlobalStylePage from "./pages/GlobalStylePage";
 import axios from "axios";
 import MainLayout from "./layout/MainLayout";
+import HomePage from "./pages/HomePage/HomePage";
 function App() {
   axios.defaults.baseURL = process.env.REACT_APP_API_URL;
   return (
@@ -17,7 +18,8 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<MainLayout />}>
-              <Route index={true} element={<DesignPage />} />
+              <Route index={true} element={<HomePage />} />
+              <Route path="design_page" element={<DesignPage />} />
               <Route path="action_page" element={<ActionPage />} />
               <Route path="global_syle_page" element={<GlobalStylePage />} />
             </Route>       

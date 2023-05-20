@@ -21,7 +21,7 @@ export default function Navbar() {
                 <li>
                     {!user && (
                         <NavLink to="/login" className={classNameHandler}>
-                            Login
+                            Giriş Yap
                         </NavLink>
                     )}
                     {user && (
@@ -30,7 +30,7 @@ export default function Navbar() {
                             onClick={logOut}
                             className={classNameHandler({})}
                         >
-                            Logout
+                            Çıkış Yap
                         </a>
                     )}
                 </li>
