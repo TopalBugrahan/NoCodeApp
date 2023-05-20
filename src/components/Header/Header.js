@@ -1,5 +1,7 @@
+import axios from "axios";
 import React from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { json, useNavigate, useParams } from "react-router-dom";
 function Header({ onClick }) {
   const navigate = useNavigate();
   const {projectId} = useParams();
@@ -7,6 +9,25 @@ function Header({ onClick }) {
     e.preventDefault();
     navigate(`/global_syle_page/${projectId}`);
   };
+
+
+  const { myScreens, globalStyles} = useSelector(
+    (state) => state.screen
+  );
+
+  const saveProject = () => {
+    axios
+      .put(`/api/v1/projects/${projectId}`, {
+        content: JSON.stringify(myScreens),
+        globalStyles: JSON.stringify(globalStyles)
+      })
+      .then((response) => {
+          if (response) {
+              alert('Başarıyla kaydedildi!');
+          }
+      });
+  }
+
   return (
     <div className="header">
       <div>
@@ -15,7 +36,7 @@ function Header({ onClick }) {
         </button>
       </div>
       <div>
-        <button className="page_button" onClick={onClick}>
+        <button className="page_button me-2" onClick={saveProject}>
             Kaydet
         </button>
         <button className="page_button" onClick={onClick}>

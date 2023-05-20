@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import StyleSelect from './StyleSelect';
 import { addGlobalStyle } from '../../redux/Screen/ScreenSlice';
 import { useNavigate, useParams } from 'react-router-dom';
+import axios from 'axios';
 
 function StyleHeader() {
     const [select, setSelect] = useState('Button');
@@ -17,11 +18,31 @@ function StyleHeader() {
     const navigate = useNavigate();
     const {projectId} = useParams();
 
+    const handleGoDesignPage = () => {
+
+        saveProject(navigate(`/design_page/${projectId}`));
+    }
+
+    const { myScreens, globalStyles} = useSelector(
+        (state) => state.screen
+      );
+    
+      const saveProject = (cb) => {
+        axios
+          .put(`/api/v1/projects/${projectId}`, {
+            content: JSON.stringify(myScreens),
+            globalStyles: JSON.stringify(globalStyles)
+          })
+          .then((response) => {
+              cb();
+          });
+      }
+
     return (
         <div className="style_header">
             <button
                 className="page_button me-auto"
-                onClick={() => navigate(`/design_page/${projectId}`)}
+                onClick={handleGoDesignPage}
             >
                 {'<- Tasarım'}
             </button>
