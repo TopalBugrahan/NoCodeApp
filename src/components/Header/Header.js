@@ -1,10 +1,11 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 function Header({ onClick }) {
   const navigate = useNavigate();
+  const {projectId} = useParams();
   const goStylePage = (e) => {
     e.preventDefault();
-    navigate("global_syle_page");
+    navigate(`/global_syle_page/${projectId}`);
   };
   return (
     <div className="header">
@@ -13,9 +14,14 @@ function Header({ onClick }) {
           Global Style
         </button>
       </div>
-      <button className="page_button" onClick={onClick}>
-        Sayfa Aç
-      </button>
+      <div>
+        <button className="page_button" onClick={onClick}>
+            Kaydet
+        </button>
+        <button className="page_button" onClick={onClick}>
+          Sayfa Aç
+        </button>
+      </div>
     </div>
   );
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import Button from '../../components/ActionComps/Button';
 import Title from '../../components/ActionComps/Title';
@@ -23,11 +23,14 @@ function ActionPage() {
     }
     const { priviteName, name, actions } = data;
 
+
+    const {projectId} = useParams();
+
     return (
         <div>
             <button
                 className="page_button mt-3 ms-3"
-                onClick={() => navigate('/')}
+                onClick={() => navigate(`/design_page/${projectId}`)}
             >
                 {'<- Tasarım'}
             </button>

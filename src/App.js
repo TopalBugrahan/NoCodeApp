@@ -19,9 +19,9 @@ function App() {
           <Routes>
             <Route path="/" element={<MainLayout />}>
               <Route index={true} element={<HomePage />} />
-              <Route path="design_page" element={<DesignPage />} />
-              <Route path="action_page" element={<ActionPage />} />
-              <Route path="global_syle_page" element={<GlobalStylePage />} />
+              <Route path="design_page/:projectId" element={<DesignPage />} />
+              <Route path="action_page/:projectId" element={<ActionPage />} />
+              <Route path="global_syle_page/:projectId" element={<GlobalStylePage />} />
             </Route>       
               <Route path="login" element={<LoginPage />} />
               <Route path="sing_up" element={<SingUp />} />     

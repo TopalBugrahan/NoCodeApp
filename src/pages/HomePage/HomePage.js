@@ -53,9 +53,7 @@ export default function HomePage() {
 
     const updateProject = (project) => {
         axios
-            .put(`/api/v1/projects/${project.projectId}`, {
-                name: project.name,
-            })
+            .put(`/api/v1/projects/${project.projectId}/name/${project.name}`)
             .then((response) => {
                 if (response) {
                     alert('Proje Güncellendi!');

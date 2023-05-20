@@ -17,7 +17,12 @@ export default function Navbar() {
     }
     return (
         <div id="navbar">
-            <ul className="nav">       
+            <ul className="nav">
+                {user && <li>
+                    <NavLink to="/" className={classNameHandler}>
+                        Ana sayfa
+                    </NavLink></li>
+                }
                 <li>
                     {!user && (
                         <NavLink to="/login" className={classNameHandler}>

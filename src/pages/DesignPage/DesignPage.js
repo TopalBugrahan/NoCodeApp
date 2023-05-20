@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useState } from "react";
+import React, { memo, useCallback, useEffect, useState } from "react";
 import update from "immutability-helper";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -6,6 +6,9 @@ import {
   addElementToScreen,
   changeInnerElementPosition,
   changeContainElementToScreenElement,
+  setMyScreens,
+  setGlobalStyles,
+  setProjectId,
 } from "../../redux/Screen/ScreenSlice";
 import LeftBar from "../../components/LeftBar";
 import RightBar from "../../components/RightBar";
@@ -20,6 +23,8 @@ import Parent from "../../components/DragElements/Parent";
 import Contain from "../../components/DragElements/Contain";
 import Loading from "../../components/DragElements/Loading";
 import Switch from "../../components/DragElements/Switch";
+import { json, useParams } from "react-router-dom";
+import axios from "axios";
 
 function DesignPage() {
   //Benim Sayfam reduxta bulunuyor
@@ -33,6 +38,24 @@ function DesignPage() {
   const [droppedBoxNames, setDroppedBoxNames] = useState([]);
   //Redux'ta bulunan fonksiyonları çağırmak için
   const dispatch = useDispatch();
+
+
+  //
+  const { projectId } = useParams();
+
+  const loadProject = (projectId) => {
+    axios
+      .get(`api/v1/projects/${projectId}`)
+      .then((response) => {
+          dispatch(setProjectId(projectId));
+          dispatch(setMyScreens(JSON.parse(response.data.content)));
+          dispatch(setGlobalStyles(JSON.parse(response.data.globalStyles)));
+      });
+  }
+
+  useEffect(() => {
+    loadProject(projectId);
+  }, [])
 
   function isDropped(boxName) {
     return droppedBoxNames.indexOf(boxName) > -1;

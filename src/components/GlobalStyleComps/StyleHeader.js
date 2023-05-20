@@ -4,7 +4,7 @@ import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import StyleSelect from './StyleSelect';
 import { addGlobalStyle } from '../../redux/Screen/ScreenSlice';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 function StyleHeader() {
     const [select, setSelect] = useState('Button');
@@ -15,12 +15,13 @@ function StyleHeader() {
     };
 
     const navigate = useNavigate();
+    const {projectId} = useParams();
 
     return (
         <div className="style_header">
             <button
                 className="page_button me-auto"
-                onClick={() => navigate('/')}
+                onClick={() => navigate(`/design_page/${projectId}`)}
             >
                 {'<- Tasarım'}
             </button>

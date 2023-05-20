@@ -3,6 +3,7 @@ import { ItemTypes } from "../../ItemType";
 export const screenSlice = createSlice({
   name: "screen",
   initialState: {
+    projectId: null,
     globalStyles: [],
     containIndexArray: [],
     nameCount: 0,
@@ -253,6 +254,15 @@ export const screenSlice = createSlice({
     ],
   },
   reducers: {
+    setProjectId: (state, action) => {
+      state.projectId = action.payload
+    },
+    setMyScreens: (state, action) => {
+        state.myScreens = action.payload
+    },
+    setGlobalStyles: (state, action) => {
+      state.globalStyles = action.payload
+    },
     addOnePage: (state) => {
       state.nameCount++;
       console.log("addOnePage");
@@ -904,6 +914,9 @@ Burada örnek bir lastDroppedItem = {name , type, top, left ,ischange,screeninde
 */
 
 export const {
+  setProjectId,
+  setMyScreens,
+  setGlobalStyles,
   addOnePage,
   addElementToScreen,
   changeInnerElementPosition,
