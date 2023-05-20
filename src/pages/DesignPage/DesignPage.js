@@ -28,7 +28,7 @@ import axios from "axios";
 
 function DesignPage() {
   //Benim Sayfam reduxta bulunuyor
-  const { myScreens, elements, screenCount } = useSelector(
+  const { myScreens, elements, screenCount, projectId: existProjectId } = useSelector(
     (state) => state.screen
   );
   console.log("MyScreens içi", myScreens);
@@ -54,7 +54,10 @@ function DesignPage() {
   }
 
   useEffect(() => {
-    loadProject(projectId);
+    if(existProjectId !== projectId)
+    {
+      loadProject(projectId); 
+    }
   }, [])
 
   function isDropped(boxName) {
