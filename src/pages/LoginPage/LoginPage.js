@@ -50,7 +50,7 @@ function LoginPage() {
               <div className="login_right_icon">
                 <AiFillLock color="white" size={"35px"} />
               </div>
-              <p style={{ fontSize: "22px" }}>Sign In</p>
+              <p style={{ fontSize: "22px" }}>Giriş Yap</p>
             </div>
 
             <div className="input_container">
@@ -72,10 +72,10 @@ function LoginPage() {
                   setPassword(e.target.value);
                 }}
               />
-              <button className="login_button">Sign In</button>
+              <button className="login_button">Giriş Yap</button>
               <div className="login_right_sing_up">
                 <Link className="all_link" to="/sing_up">
-                  Sing Up
+                  Kayıt Ol
                 </Link>
               </div>
             </div>
