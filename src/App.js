@@ -10,8 +10,16 @@ import GlobalStylePage from "./pages/GlobalStylePage";
 import axios from "axios";
 import MainLayout from "./layout/MainLayout";
 import HomePage from "./pages/HomePage/HomePage";
+import { useAuth } from "./context/AuthContext";
 function App() {
+
+  const { user, setUser } = useAuth();
+
   axios.defaults.baseURL = process.env.REACT_APP_API_URL;
+  if(user)
+  {
+    axios.defaults.headers.common = {'Authorization': `Bearer ${user.accessToken}`}
+  }
   return (
     <Fragment>
       <DndProvider backend={HTML5Backend}>
