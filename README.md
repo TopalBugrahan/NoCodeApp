@@ -29,27 +29,31 @@ By doing these, you have taken care of the backend part. Now it is time to run t
 
 The first screen you will see when the project opens will be the login page 
 
-<img src="https://github.com/TopalBugrahan/NoCodeApp/assets/76047788/d17ae937-f1f6-4e59-88c6-561341f53678"/>
+<img src="https://github.com/TopalBugrahan/NoCodeApp/assets/76047788/05fa68bf-5915-447f-8482-6f661b11997c"/>
+
 
 If you are not registered here, go to the register page
 
-<img src="https://github.com/TopalBugrahan/NoCodeApp/assets/76047788/2e8bcbe7-17ae-4a08-a27e-abefe0c804f4"/>
+<img src="https://github.com/TopalBugrahan/NoCodeApp/assets/76047788/c0951dbc-93f1-4799-8d45-d5a5ab7e305c"/>
 
 When you log in, you will see a My Projects page where you will find the projects you have created. If you do not have a project, there is also the option to create a project
 
-<img src="https://github.com/TopalBugrahan/NoCodeApp/assets/76047788/be507846-36bf-45dd-ad49-fc53ea0fe6b4"/>
+<img src="https://github.com/TopalBugrahan/NoCodeApp/assets/76047788/5350e95d-0d15-4560-808d-e3f240b40692"/>
+
 
 There will be a design page for any project you will log in, there are elements you will use on the left side, you can drag and drop these elements to the design screen and make your design. In addition, the bar on the right side opens the properties of the element you click on, these properties change according to the element, here you can change its position or size in the mobile screen, background color, etc.
 
-<img src="https://github.com/TopalBugrahan/NoCodeApp/assets/76047788/bd957d69-a402-4d21-8fd8-39255f04ed63"/>
+<img src="https://github.com/TopalBugrahan/NoCodeApp/assets/76047788/d542c1dd-5772-4a2e-8b67-ca1dbad525a0"/>
+
 
 With the global style button at the top left of the design screen, you can set a style for the element you want and then integrate it wherever you put a button.
 
-<img src="https://github.com/TopalBugrahan/NoCodeApp/assets/76047788/e7425e37-c16d-4088-b41f-0e1fbcc9b5ec"/>
+<img src="https://github.com/TopalBugrahan/NoCodeApp/assets/76047788/0b37c852-72ed-4f12-a2a2-12c7fb31d1ca"/>
 
 At the bottom of the right bar of the clicked element there are buttons to delete the element and add an action. Add action button takes you to add action page where you can add many actions to the element.
 
-<img src="https://github.com/TopalBugrahan/NoCodeApp/assets/76047788/3d81b190-690b-4571-af2e-8ad214ea1e2f"/>
+<img src="https://github.com/TopalBugrahan/NoCodeApp/assets/76047788/49c0e0c7-2b2f-4409-bd71-3b54f5edc4d0"/>
+
 
 When everything you want to do in the project is finished, click on the save and download buttons and you will see a source code file written in React Native in a zip file. If you open this file, you will see the mobile application you have designed.
 
@@ -57,22 +61,28 @@ When everything you want to do in the project is finished, click on the save and
 
 # Demo 
 
-<img src="https://github.com/TopalBugrahan/NoCodeApp/assets/76047788/ecfd4edf-2d4c-4b00-996c-0a7f9e077011"/>
+<img src="https://github.com/TopalBugrahan/NoCodeApp/assets/76047788/0f24bfd5-ec1b-44fe-9c01-f89eecd3cff2"/>
 
 
-<img src="https://github.com/TopalBugrahan/NoCodeApp/assets/76047788/b603e525-647b-4051-801a-79d5309e37ca"/>
+
+<img src="https://github.com/TopalBugrahan/NoCodeApp/assets/76047788/70531d58-627e-4b3a-899f-14a578b0d014"/>
 
 
-<img src="https://github.com/TopalBugrahan/NoCodeApp/assets/76047788/4b167163-f195-4800-947d-25533e76cd19"/>
+
+<img src="https://github.com/TopalBugrahan/NoCodeApp/assets/76047788/f93ca016-c1e2-432f-8e97-d221d4bea86c"/>
 
 
-<img src="https://github.com/TopalBugrahan/NoCodeApp/assets/76047788/ba150837-87b4-407f-b698-caaef36c849b"/>
+
+<img src="https://github.com/TopalBugrahan/NoCodeApp/assets/76047788/678f0d10-b1e8-4957-bed6-217a7d03dc87"/>
 
 
-<img src="https://github.com/TopalBugrahan/NoCodeApp/assets/76047788/7b751d97-9e9f-4f01-89b1-e07265955aec"/>
+
+<img src="https://github.com/TopalBugrahan/NoCodeApp/assets/76047788/a1ed46aa-76d3-4b6b-ab14-08720bd4d2aa"/>
 
 
-<img src="https://github.com/TopalBugrahan/NoCodeApp/assets/76047788/56a2d980-c087-45ff-b02b-a7a44f8be413"/>
+
+<img src="https://github.com/TopalBugrahan/NoCodeApp/assets/76047788/c7d81de0-c1cd-4031-ab9d-140057d99f6f"/>
+
 
 
 
