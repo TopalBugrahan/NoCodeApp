@@ -19,7 +19,14 @@ The aim of this project is to develop a mobile application for people who do not
 - React-Dnd
 - Axios
 - React Router
-  
+
+# Architecture 
+<img src="https://github.com/TopalBugrahan/NoCodeApp/assets/76047788/cde9ff32-fcf9-44e5-9c8d-e5ab4b58ec15"/>
+
+<img src="https://github.com/TopalBugrahan/NoCodeApp/assets/76047788/edb517d8-4c35-42a4-8cb6-83ca87a17e0f"/>
+
+
+
 # What Needs To Be Done To Run the Project
 
 The first thing you need to do to run the project is to download the backend side of our project by going to [https://www.google.com/search?client=opera-gx&q=disayn&sourceid=opera&ie=UTF-8&oe=UTF-8](https://github.com/TopalBugrahan/NoCodeBackend). Then you need to run the file named KouMobilio.sln in the beckend project with Visual Studio and stand up the server over https. 
