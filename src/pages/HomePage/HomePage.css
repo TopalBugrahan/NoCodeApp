@@ -1,0 +1,16 @@
+.homepage table {
+    width: 100%;
+}
+
+.homepage table th {
+    width: 100%;
+}
+
+.homepage table th:last-child {
+    width: 100px;
+}
+
+.homepage table td .actions {
+    display: flex;
+    gap: 10px;
+}

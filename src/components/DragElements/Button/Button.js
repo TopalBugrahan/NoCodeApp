@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 function Button({ index, screenIndex, isComingContain, contain_index, item }) {
-  const { myScreens } = useSelector((state) => state.screen);
+  const { globalStyles, myScreens } = useSelector((state) => state.screen);
   let data = myScreens[screenIndex].lastDroppedItem[index];
   if (isComingContain === true) {
     data = myScreens[screenIndex].lastDroppedItem[index].items[contain_index];
@@ -22,13 +22,18 @@ function Button({ index, screenIndex, isComingContain, contain_index, item }) {
     globalStyle,
   } = data;
   if (globalStyle !== null) {
-    text_color = globalStyle.styles.text_color;
-    font_size = globalStyle.styles.font_size;
-    backgroundColor = globalStyle.styles.backgroundColor;
-    borderColor = globalStyle.styles.borderColor;
-    borderRedius = globalStyle.styles.borderRedius;
-    borderStyle = globalStyle.styles.borderStyle;
-    borderWidth = globalStyle.styles.borderWidth;
+    let style = globalStyles.find(el => el.id == globalStyle.id)?.styles || globalStyle.styles;
+    console.log(style); 
+    if(style != null)
+    {
+      text_color = style.text_color;
+      font_size = style.font_size;
+      backgroundColor = style.backgroundColor;
+      borderColor = style.borderColor;
+      borderRedius = style.borderRedius;
+      borderStyle = style.borderStyle;
+      borderWidth = style.borderWidth;
+    }
   }
   let width = data.width;
   let height = data.height;

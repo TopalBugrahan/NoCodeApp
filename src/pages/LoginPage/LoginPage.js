@@ -1,13 +1,37 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AiFillLock } from "react-icons/ai";
+import { useAuth } from "../../context/AuthContext";
+import axios from "axios";
 function LoginPage() {
-  const [emial, setEmail] = useState(null);
-  const [password, setPassword] = useState(null);
+    const navigate = useNavigate();
+    const location = useLocation();
+    const { user, setUser } = useAuth();
+
+     if (user) {
+        navigate('/', { replace: true });
+    }
+
+
+  const [email, setEmail] = useState("admin@koumobilio.com");
+  const [password, setPassword] = useState("123456");
   const handleSubmit = (event) => {
+    axios.post('auth/login', {
+      usernameOrEmail: email,
+      password: password
+    }).then((response) => {
+      setUser(response.data); //Access Token
+
+      navigate(location?.state?.return_url || '/', { replace: true });
+    })
+    .catch((error) => {
+      let message = error.response.data.messages.join('\n') ||
+                    error.response.statusText
+      alert(message);
+    })
     event.preventDefault();
-    console.log(emial, password);
   };
+  
   return (
     <div className="login_container">
       <div className="login_left_container">
@@ -26,7 +50,7 @@ function LoginPage() {
               <div className="login_right_icon">
                 <AiFillLock color="white" size={"35px"} />
               </div>
-              <p style={{ fontSize: "22px" }}>Sign In</p>
+              <p style={{ fontSize: "22px" }}>Giriş Yap</p>
             </div>
 
             <div className="input_container">
@@ -34,6 +58,7 @@ function LoginPage() {
                 className="login_input"
                 placeholder="Email"
                 type="text"
+                defaultValue={email}
                 onChange={(e) => {
                   setEmail(e.target.value);
                 }}
@@ -42,14 +67,15 @@ function LoginPage() {
                 className="login_input"
                 placeholder="Password"
                 type="password"
+                defaultValue={password}
                 onChange={(e) => {
                   setPassword(e.target.value);
                 }}
               />
-              <button className="login_button">Sign In</button>
+              <button className="login_button">Giriş Yap</button>
               <div className="login_right_sing_up">
                 <Link className="all_link" to="/sing_up">
-                  Sing Up
+                  Kayıt Ol
                 </Link>
               </div>
             </div>

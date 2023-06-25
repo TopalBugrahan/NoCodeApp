@@ -8,21 +8,28 @@ function GlobalStyle({ name, screenIndex, index, contain_index }) {
   const dispatch = useDispatch();
   const { globalStyles, myScreens } = useSelector((state) => state.screen);
   const [options, setOptions] = useState([]);
+  const [selectedOption, setSelectedOption] = useState(null);
 
-  let defaultValue;
+  
   useEffect(() => {
     const options1 = [{ value: null, label: "No Global Style" }];
-    /* if (contain_index !== undefined) {
-      defaultValue =
+    
+    let selectedStyle;
+    if (contain_index !== undefined) {
+      selectedStyle =
         myScreens[screenIndex].lastDroppedItem[index].items[contain_index]
           .globalStyle;
     } else {
-      defaultValue = myScreens[screenIndex].lastDroppedItem[index].globalStyle;
-    }*/
+      selectedStyle = myScreens[screenIndex].lastDroppedItem[index].globalStyle;
+    }
+
     globalStyles.map((item, index) => {
       if (item.name === name) {
-        console.log(globalStyles[index]);
         options1.push({ value: globalStyles[index], label: item.styleName });
+        if(selectedStyle && selectedStyle.id == globalStyles[index].id)
+        {
+          setSelectedOption(options1[options1.length-1]);
+        }
       }
     });
     setOptions(options1);
@@ -30,9 +37,11 @@ function GlobalStyle({ name, screenIndex, index, contain_index }) {
   return (
     <div>
       <Select
+        value={selectedOption}
         options={options}
         placeholder={"Lütfen seçim yapınız"}
         onChange={(e) => {
+          setSelectedOption(e);
           const select = e.value;
           console.log("select", select);
           dispatch(

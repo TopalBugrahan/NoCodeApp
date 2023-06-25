@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 function Title({ index, screenIndex, isComingContain, contain_index }) {
-  const { myScreens } = useSelector((state) => state.screen);
+  const { myScreens, globalStyles } = useSelector((state) => state.screen);
   let data = myScreens[screenIndex].lastDroppedItem[index];
   if (isComingContain === true) {
     data = myScreens[screenIndex].lastDroppedItem[index].items[contain_index];
@@ -30,17 +30,21 @@ function Title({ index, screenIndex, isComingContain, contain_index }) {
     height = 0;
   }
   if (globalStyle !== null) {
-    fontStyle = globalStyle.styles.fontStyle;
-    textDecoration = globalStyle.styles.textDecoration;
-    text_align = globalStyle.styles.text_align;
-    font_weight = globalStyle.styles.font_weight;
-    text_color = globalStyle.styles.text_color;
-    font_size = globalStyle.styles.font_size;
-    backgroundColor = globalStyle.styles.backgroundColor;
-    borderColor = globalStyle.styles.borderColor;
-    borderRedius = globalStyle.styles.borderRedius;
-    borderStyle = globalStyle.styles.borderStyle;
-    borderWidth = globalStyle.styles.borderWidth;
+    let style = globalStyles.find(el => el.id == globalStyle.id)?.styles || globalStyle.styles;
+    if(style != null)
+    {
+      fontStyle = style.fontStyle;
+      textDecoration = style.textDecoration;
+      text_align = style.text_align;
+      font_weight = style.font_weight;
+      text_color = style.text_color;
+      font_size = style.font_size;
+      backgroundColor = style.backgroundColor;
+      borderColor = style.borderColor;
+      borderRedius = style.borderRedius;
+      borderStyle = style.borderStyle;
+      borderWidth = style.borderWidth;
+    }
   }
   return (
     <div
